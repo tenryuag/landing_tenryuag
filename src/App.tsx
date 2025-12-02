@@ -102,7 +102,7 @@ export default function App() {
       title: "WorkTrack – Sistema de Órdenes de Producción",
       description:
         "App de control y seguimiento para empresas japonesas con módulos de órdenes, clientes, producción y trazabilidad",
-      tags: ["React", "TypeScript", "Supabase", "Spring Boot"],
+      tags: ["React", "TypeScript", "Linux", "Spring Boot"],
       image:
         "/images/worktrack.png"
     },
@@ -112,7 +112,7 @@ export default function App() {
         "Chatbot en WhatsApp/n8n que agenda, confirma y gestiona citas sin intervención humana, con integración a Google Calendar",
       tags: ["n8n", "WhatsApp", "Google Calendar", "Webhooks"],
       image:
-        "https://images.unsplash.com/photo-1611162617474-5b21e879e113?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjaGF0Ym90fGVufDF8fHx8MTc2MzAzMDU5OXww&ixlib=rb-4.1.0&q=80&w=1080"
+        "/images/reservaciones.png"
     },
     {
       title: "Asistente de Ventas - Maquinaria Pesada",
@@ -120,15 +120,15 @@ export default function App() {
         "Bot que recibe mensajes, cotiza automáticamente, registra datos en CRM y envía PDF. Automatización completa del flujo comercial",
       tags: ["n8n", "WhatsApp", "CRM", "PDF Generation"],
       image:
-        "https://images.unsplash.com/photo-1761195696590-3490ea770aa1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhdXRvbWF0aW9uJTIwdGVjaG5vbG9neXxlbnwxfHx8fDE3NjMwMzA1OTl8MA&ixlib=rb-4.1.0&q=80&w=1080"
+        "/images/cotizaciones.png"
     },
     {
-      title: "安否確認システム – Sistema Japonés",
+      title: "Sistema Administratio – Matriz de Riesgos",
       description:
-        "Desarrollo backend con Spring Boot para empresa japonesa. Lógica de mantenimiento de grupos y usuarios con participación en diseño y arquitectura",
-      tags: ["Spring Boot", "PostgreSQL", "Java"],
+        "App para evaluar, visualizar y priorizar riesgos operativos en empresas japonesas, con matrices dinámicas y seguimiento de acciones",
+      tags: ["TypeScript", "PostgreSQL", "React", "Supabase"],
       image:
-        "https://images.unsplash.com/photo-1644337540803-2b2fb3cebf12?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtaW5pbWFsaXN0JTIwd29ya3NwYWNlJTIwZGVza3xlbnwxfHx8fDE3NjI5NzEyMTJ8MA&ixlib=rb-4.1.0&q=80&w=1080"
+        "/images/matrizriesgos.png"
     }
   ];
 
