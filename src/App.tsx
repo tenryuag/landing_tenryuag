@@ -3,8 +3,6 @@ import { motion, useScroll, useTransform } from "motion/react";
 import { Button } from "./components/ui/button";
 import { Card } from "./components/ui/card";
 import { Badge } from "./components/ui/badge";
-import { Input } from "./components/ui/input";
-import { Textarea } from "./components/ui/textarea";
 import {
   Code2,
   Zap,
@@ -28,6 +26,7 @@ import { FloatingIcon } from "./components/FloatingIcon";
 import { InteractiveCursor } from "./components/InteractiveCursor";
 import { ParticleField } from "./components/ParticleField";
 import { SkillBar3D } from "./components/SkillBar3D";
+import { ContactForm } from "./components/ContactForm";
 
 export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -586,45 +585,13 @@ export default function App() {
             transition={{ delay: 0.2 }}
           >
             <Card className="p-8 border-border/50">
-              <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="name" className="block mb-2">
-                      Nombre
-                    </label>
-                    <Input id="name" placeholder="Tu nombre" />
-                  </div>
-                  <div>
-                    <label htmlFor="email" className="block mb-2">
-                      Email
-                    </label>
-                    <Input id="email" type="email" placeholder="tu@email.com" />
-                  </div>
-                </div>
-
-                <div>
-                  <label htmlFor="subject" className="block mb-2">
-                    Asunto
-                  </label>
-                  <Input id="subject" placeholder="¿En qué puedo ayudarte?" />
-                </div>
-
-                <div>
-                  <label htmlFor="message" className="block mb-2">
-                    Mensaje
-                  </label>
-                  <Textarea
-                    id="message"
-                    placeholder="Cuéntame más sobre tu negocio, qué haces hoy y qué te gustaría automatizar..."
-                    rows={6}
-                  />
-                </div>
-
-                <Button type="submit" size="lg" className="w-full group">
-                  Enviar Mensaje
-                  <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </Button>
-              </form>
+              <ContactForm
+                onSubmit={(data) => {
+                  console.log("Datos del formulario:", data);
+                  // Aquí conectarás con tu backend o n8n
+                  alert("¡Gracias! Te contactaremos pronto.");
+                }}
+              />
 
               <div className="mt-8 pt-8 border-t border-border">
                 <div className="flex justify-center gap-6">
