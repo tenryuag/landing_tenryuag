@@ -125,7 +125,7 @@ export default function App() {
     {
       title: "Sistema Administratio – Matriz de Riesgos",
       description:
-        "App para evaluar, visualizar y priorizar riesgos operativos en empresas japonesas, con matrices dinámicas y seguimiento de acciones",
+        "App para evaluar, visualizar y priorizar riesgos operativos en empresas, con seguimiento de acciones",
       tags: ["TypeScript", "PostgreSQL", "React", "Supabase"],
       image:
         "/images/matrizriesgos.png"
