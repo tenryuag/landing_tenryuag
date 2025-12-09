@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
+import { useTranslation } from "react-i18next";
 import { Button } from "./components/ui/button";
 import { Card } from "./components/ui/card";
 import { Badge } from "./components/ui/badge";
@@ -27,8 +28,10 @@ import { InteractiveCursor } from "./components/InteractiveCursor";
 import { ParticleField } from "./components/ParticleField";
 import { SkillBar3D } from "./components/SkillBar3D";
 import { ContactForm } from "./components/ContactForm";
+import { LanguageSwitcher } from "./components/LanguageSwitcher";
 
 export default function App() {
+  const { t } = useTranslation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const { scrollYProgress } = useScroll();
@@ -60,97 +63,68 @@ export default function App() {
   const services = [
     {
       icon: <Lightbulb className="w-12 h-12" />,
-      title: "Mapa de Armonía Operativa",
-      description:
-        "Diagnóstico estratégico para entender tu caos actual y trazar un plan claro de automatización.",
-      features: [
-        "Revisión de procesos, Excel, WhatsApp/LINE y tareas manuales",
-        "Identificación de cuellos de botella y errores críticos",
-        "Mapa de oportunidades de automatización priorizado",
-        "Hoja de ruta clara para pasar del caos al flujo"
-      ]
+      titleKey: "services.map.title",
+      descriptionKey: "services.map.description",
+      featuresKey: "services.map.features"
     },
     {
       icon: <Workflow className="w-12 h-12" />,
-      title: "HarmonyFlow System",
-      description:
-        "Sistema automático y centralizado que reemplaza el Excel eterno y organiza tu operación en un solo flujo.",
-      features: [
-        "Centralización de datos en una base moderna (Supabase / PostgreSQL)",
-        "Automatización con n8n + IA para tareas repetitivas",
-        "Integración con WhatsApp, LINE, Google Calendar y más",
-        "Panel o app interna hecha a medida para tu equipo"
-      ]
+      titleKey: "services.harmonyFlow.title",
+      descriptionKey: "services.harmonyFlow.description",
+      featuresKey: "services.harmonyFlow.features"
     },
     {
       icon: <Clock className="w-12 h-12" />,
-      title: "Armonía Continua",
-      description:
-        "Mantenimiento y optimización mensual para que tu sistema evolucione contigo sin volver al caos.",
-      features: [
-        "Monitoreo de flujos y corrección de errores",
-        "Ajustes por cambios en tu operación",
-        "Nuevas automatizaciones pequeñas cada mes",
-        "Soporte y mejora continua de tus sistemas"
-      ]
+      titleKey: "services.continuousHarmony.title",
+      descriptionKey: "services.continuousHarmony.description",
+      featuresKey: "services.continuousHarmony.features"
     }
   ];
 
   const projects = [
     {
-      title: "WorkTrack – Sistema de Órdenes de Producción",
-      description:
-        "App de control y seguimiento para empresas japonesas con módulos de órdenes, clientes, producción y trazabilidad",
+      titleKey: "projects.worktrack.title",
+      descriptionKey: "projects.worktrack.description",
       tags: ["React", "TypeScript", "Linux", "Spring Boot"],
-      image:
-        "/images/worktrack.png"
+      image: "/images/worktrack.png"
     },
     {
-      title: "Sistema de Reservas Automatizado",
-      description:
-        "Chatbot en WhatsApp/n8n que agenda, confirma y gestiona citas sin intervención humana, con integración a Google Calendar",
+      titleKey: "projects.reservations.title",
+      descriptionKey: "projects.reservations.description",
       tags: ["n8n", "WhatsApp", "Google Calendar", "Webhooks"],
-      image:
-        "/images/reservaciones.png"
+      image: "/images/reservaciones.png"
     },
     {
-      title: "Asistente de Ventas - Maquinaria Pesada",
-      description:
-        "Bot que recibe mensajes, cotiza automáticamente, registra datos en CRM y envía PDF. Automatización completa del flujo comercial",
+      titleKey: "projects.sales.title",
+      descriptionKey: "projects.sales.description",
       tags: ["n8n", "WhatsApp", "CRM", "PDF Generation"],
-      image:
-        "/images/cotizaciones.png"
+      image: "/images/cotizaciones.png"
     },
     {
-      title: "Sistema Administratio – Matriz de Riesgos",
-      description:
-        "App para evaluar, visualizar y priorizar riesgos operativos en empresas, con seguimiento de acciones",
+      titleKey: "projects.administratio.title",
+      descriptionKey: "projects.administratio.description",
       tags: ["TypeScript", "PostgreSQL", "React", "Supabase"],
-      image:
-        "/images/matrizriesgos.png"
+      image: "/images/matrizriesgos.png"
     }
   ];
 
   const testimonials = [
     {
-      name: "Director Comercial",
-      role: "CDMX",
-      content:
-        "Gracias a TenryuAG dejamos de perder tiempo en tareas repetitivas. Hoy todo se actualiza solo y nuestro equipo por fin puede enfocarse en vender.",
+      nameKey: "testimonials.commercialDirector.name",
+      roleKey: "testimonials.commercialDirector.role",
+      contentKey: "testimonials.commercialDirector.content",
       avatar: "DC"
     },
     {
-      name: "Gerente de Operaciones",
-      role: "México",
-      content:
-        "Logramos automatizar el 80% de la atención por WhatsApp. La experiencia fue clara, profesional y siempre confiable.",
+      nameKey: "testimonials.operationsManager.name",
+      roleKey: "testimonials.operationsManager.role",
+      contentKey: "testimonials.operationsManager.content",
       avatar: "GO"
     },
     {
-      name: "Cliente Corporativo",
-      role: "Sector Financiero - Japón",
-      content:
-        "Excelente comunicación, calidad en el desarrollo y resultados visibles desde la primera semana.",
+      nameKey: "testimonials.corporateClient.name",
+      roleKey: "testimonials.corporateClient.role",
+      contentKey: "testimonials.corporateClient.content",
       avatar: "CC"
     }
   ];
@@ -183,12 +157,11 @@ export default function App() {
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center gap-8">
-              {["Inicio", "Servicios", "Sobre Mí", "Proyectos", "Testimonios", "Contacto"].map(
-                (item, index) => {
-                  const sectionId = ["home", "services", "about", "projects", "testimonials", "contact"][index];
+              {["home", "services", "about", "projects", "testimonials", "contact"].map(
+                (sectionId) => {
                   return (
                     <button
-                      key={item}
+                      key={sectionId}
                       onClick={() => scrollToSection(sectionId)}
                       className={`transition-colors ${
                         activeSection === sectionId
@@ -196,12 +169,13 @@ export default function App() {
                           : "text-muted-foreground hover:text-foreground"
                       }`}
                     >
-                      {item}
+                      {t(`nav.${sectionId}`)}
                     </button>
                   );
                 }
               )}
-              <Button onClick={() => scrollToSection("contact")}>Contáctame</Button>
+              <LanguageSwitcher />
+              <Button onClick={() => scrollToSection("contact")}>{t('nav.contactMe')}</Button>
             </div>
 
             {/* Mobile Menu Button */}
@@ -218,20 +192,22 @@ export default function App() {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
             >
-              {["Inicio", "Servicios", "Sobre Mí", "Proyectos", "Testimonios", "Contacto"].map(
-                (item, index) => {
-                  const sectionId = ["home", "services", "about", "projects", "testimonials", "contact"][index];
+              {["home", "services", "about", "projects", "testimonials", "contact"].map(
+                (sectionId) => {
                   return (
                     <button
-                      key={item}
+                      key={sectionId}
                       onClick={() => scrollToSection(sectionId)}
                       className="block w-full text-left py-2 text-muted-foreground hover:text-foreground transition-colors"
                     >
-                      {item}
+                      {t(`nav.${sectionId}`)}
                     </button>
                   );
                 }
               )}
+              <div className="pt-4">
+                <LanguageSwitcher />
+              </div>
             </motion.div>
           )}
         </div>
@@ -251,7 +227,7 @@ export default function App() {
                 transition={{ delay: 0.2 }}
               >
                 <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">
-                  Automatización & Sistemas a Medida
+                  {t('hero.badge')}
                 </Badge>
               </motion.div>
 
@@ -261,11 +237,11 @@ export default function App() {
                 transition={{ delay: 0.3 }}
                 className="text-4xl sm:text-5xl lg:text-6xl leading-tight"
               >
-                Flujo claro.
+                {t('hero.title')}
                 <br />
-                Operación estable.
+                {t('hero.subtitle1')}
                 <br />
-                <span className="text-primary">Armonía en cada proceso.</span>
+                <span className="text-primary">{t('hero.subtitle2')}</span>
               </motion.h1>
 
               <motion.p
@@ -274,9 +250,7 @@ export default function App() {
                 transition={{ delay: 0.4 }}
                 className="text-xl text-muted-foreground max-w-2xl"
               >
-                Transformo el caos de Excel y procesos manuales en sistemas automáticos, centralizados
-                y elegantes que liberan tiempo, reducen errores y devuelven claridad y armonía a tu
-                operación.
+                {t('hero.description')}
               </motion.p>
 
               <motion.div
@@ -286,7 +260,7 @@ export default function App() {
                 className="flex flex-col sm:flex-row gap-4"
               >
                 <Button size="lg" onClick={() => scrollToSection("contact")} className="group">
-                  Iniciar Proyecto
+                  {t('hero.startProject')}
                   <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Button>
                 <Button
@@ -294,7 +268,7 @@ export default function App() {
                   variant="outline"
                   onClick={() => scrollToSection("services")}
                 >
-                  Ver Cómo Trabajo
+                  {t('hero.seeHowIWork')}
                 </Button>
               </motion.div>
 
@@ -306,15 +280,15 @@ export default function App() {
               >
                 <div>
                   <div className="text-3xl font-semibold text-primary">20+</div>
-                  <div className="text-sm text-muted-foreground">Proyectos completados</div>
+                  <div className="text-sm text-muted-foreground">{t('hero.stats.projects')}</div>
                 </div>
                 <div>
                   <div className="text-3xl font-semibold text-primary">90%</div>
-                  <div className="text-sm text-muted-foreground">Satisfacción cliente</div>
+                  <div className="text-sm text-muted-foreground">{t('hero.stats.satisfaction')}</div>
                 </div>
                 <div>
                   <div className="text-3xl font-semibold text-primary">4+</div>
-                  <div className="text-sm text-muted-foreground">Años de experiencia en Japón</div>
+                  <div className="text-sm text-muted-foreground">{t('hero.stats.experience')}</div>
                 </div>
               </motion.div>
             </motion.div>
@@ -361,19 +335,18 @@ export default function App() {
             className="text-center mb-16"
           >
             <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">
-              Servicios
+              {t('services.badge')}
             </Badge>
-            <h2 className="text-4xl sm:text-5xl mb-4">Del Caos al Flujo, Paso a Paso</h2>
+            <h2 className="text-4xl sm:text-5xl mb-4">{t('services.title')}</h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Tres servicios diseñados para llevar tu negocio desde el Excel eterno hasta un sistema
-              automático, claro y en armonía.
+              {t('services.description')}
             </p>
           </motion.div>
 
           <div className="grid md:grid-cols-3 gap-8">
             {services.map((service, index) => (
               <motion.div
-                key={service.title}
+                key={service.titleKey}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -389,11 +362,11 @@ export default function App() {
                     >
                       {service.icon}
                     </motion.div>
-                    <h3 className="text-2xl mb-3">{service.title}</h3>
-                    <p className="text-muted-foreground mb-6">{service.description}</p>
+                    <h3 className="text-2xl mb-3">{t(service.titleKey)}</h3>
+                    <p className="text-muted-foreground mb-6">{t(service.descriptionKey)}</p>
                     <ul className="space-y-2">
-                      {service.features.map((feature) => (
-                        <li key={feature} className="flex items-center gap-2 text-sm">
+                      {(t(service.featuresKey, { returnObjects: true }) as string[]).map((feature, idx) => (
+                        <li key={idx} className="flex items-center gap-2 text-sm">
                           <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0" />
                           <span>{feature}</span>
                         </li>
@@ -418,18 +391,14 @@ export default function App() {
               className="space-y-6"
             >
               <Badge className="bg-accent/10 text-accent border-accent/20">
-                Sobre TenryuAG
+                {t('about.badge')}
               </Badge>
-              <h2 className="text-4xl sm:text-5xl">Disciplina, Creatividad y Armonía</h2>
+              <h2 className="text-4xl sm:text-5xl">{t('about.title')}</h2>
               <p className="text-lg text-muted-foreground">
-                Con más de 4 años de experiencia como desarrollador en Japón, integro disciplina
-                japonesa, creatividad mexicana y tecnología moderna para crear flujos automáticos que
-                combinan claridad, estabilidad y armonía.
+                {t('about.description1')}
               </p>
               <p className="text-lg text-muted-foreground">
-                Estoy especializado en automatizaciones con IA, integraciones empresariales y
-                desarrollo full-stack con React y Spring Boot. He trabajado en proyectos
-                corporativos para empresas japonesas en sectores financiero, manufactura y consultoría.
+                {t('about.description2')}
               </p>
 
               <div className="grid sm:grid-cols-2 gap-6 pt-4">
@@ -440,9 +409,9 @@ export default function App() {
                     </div>
                   </div>
                   <div>
-                    <h4>Entregas Puntuales</h4>
+                    <h4>{t('about.punctualDelivery.title')}</h4>
                     <p className="text-sm text-muted-foreground">
-                      Plazos claros y realistas, respetando tu operación
+                      {t('about.punctualDelivery.description')}
                     </p>
                   </div>
                 </div>
@@ -454,9 +423,9 @@ export default function App() {
                     </div>
                   </div>
                   <div>
-                    <h4>Enfoque en Resultados</h4>
+                    <h4>{t('about.focusOnResults.title')}</h4>
                     <p className="text-sm text-muted-foreground">
-                      Menos caos, más control y tiempo para lo importante
+                      {t('about.focusOnResults.description')}
                     </p>
                   </div>
                 </div>
@@ -475,17 +444,17 @@ export default function App() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <Badge className="mb-4 bg-accent/10 text-accent border-accent/20">Portafolio</Badge>
-            <h2 className="text-4xl sm:text-5xl mb-4">Proyectos Destacados</h2>
+            <Badge className="mb-4 bg-accent/10 text-accent border-accent/20">{t('projects.badge')}</Badge>
+            <h2 className="text-4xl sm:text-5xl mb-4">{t('projects.title')}</h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Algunos ejemplos de soluciones que he desarrollado
+              {t('projects.description')}
             </p>
           </motion.div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {projects.map((project, index) => (
               <motion.div
-                key={project.title}
+                key={project.titleKey}
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
@@ -497,14 +466,14 @@ export default function App() {
                   <div className="relative h-48 overflow-hidden">
                     <ImageWithFallback
                       src={project.image}
-                      alt={project.title}
+                      alt={t(project.titleKey)}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                   </div>
                   <div className="p-6">
-                    <h3 className="text-xl mb-2">{project.title}</h3>
-                    <p className="text-muted-foreground mb-4">{project.description}</p>
+                    <h3 className="text-xl mb-2">{t(project.titleKey)}</h3>
+                    <p className="text-muted-foreground mb-4">{t(project.descriptionKey)}</p>
                     <div className="flex flex-wrap gap-2">
                       {project.tags.map((tag) => (
                         <Badge key={tag} variant="outline" className="text-xs">
@@ -530,15 +499,15 @@ export default function App() {
             className="text-center mb-16"
           >
             <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">
-              Testimonios
+              {t('testimonials.badge')}
             </Badge>
-            <h2 className="text-4xl sm:text-5xl mb-4">Lo Que Dicen Mis Clientes</h2>
+            <h2 className="text-4xl sm:text-5xl mb-4">{t('testimonials.title')}</h2>
           </motion.div>
 
           <div className="grid md:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
               <motion.div
-                key={testimonial.name}
+                key={testimonial.nameKey}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -550,11 +519,11 @@ export default function App() {
                       {testimonial.avatar}
                     </div>
                     <div>
-                      <h4>{testimonial.name}</h4>
-                      <p className="text-sm text-muted-foreground">{testimonial.role}</p>
+                      <h4>{t(testimonial.nameKey)}</h4>
+                      <p className="text-sm text-muted-foreground">{t(testimonial.roleKey)}</p>
                     </div>
                   </div>
-                  <p className="text-muted-foreground italic">"{testimonial.content}"</p>
+                  <p className="text-muted-foreground italic">"{t(testimonial.contentKey)}"</p>
                 </Card>
               </motion.div>
             ))}
@@ -571,10 +540,10 @@ export default function App() {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <Badge className="mb-4 bg-accent/10 text-accent border-accent/20">Contacto</Badge>
-            <h2 className="text-4xl sm:text-5xl mb-4">¿Listo Para Empezar?</h2>
+            <Badge className="mb-4 bg-accent/10 text-accent border-accent/20">{t('contact.badge')}</Badge>
+            <h2 className="text-4xl sm:text-5xl mb-4">{t('contact.title')}</h2>
             <p className="text-xl text-muted-foreground">
-              Cuéntame cómo trabajas hoy y diseñamos juntos el flujo que tu negocio necesita.
+              {t('contact.description')}
             </p>
           </motion.div>
 
@@ -589,7 +558,7 @@ export default function App() {
                 onSubmit={(data) => {
                   console.log("Datos del formulario:", data);
                   // Aquí conectarás con tu backend o n8n
-                  alert("¡Gracias! Te contactaremos pronto.");
+                  alert(t('contact.form.successMessage'));
                 }}
               />
 
@@ -627,7 +596,7 @@ export default function App() {
       {/* Footer */}
       <footer className="py-8 px-4 sm:px-6 lg:px-8 border-t border-border">
         <div className="max-w-7xl mx-auto text-center text-muted-foreground">
-          <p>© 2025 TenryuAG. Todos los derechos reservados.</p>
+          <p>{t('footer.copyright')}</p>
         </div>
       </footer>
     </div>
