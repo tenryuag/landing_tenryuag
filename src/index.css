@@ -1865,16 +1865,6 @@ html {
   perspective: 1000px;
 }
 
-body {
-  cursor: none;
-}
-
-@media (width <= 768px) {
-  body {
-    cursor: auto;
-  }
-}
-
 @property --tw-rotate-x {
   syntax: "*";
   inherits: false;

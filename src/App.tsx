@@ -24,7 +24,6 @@ import {
 import { ImageWithFallback } from "./components/figma/ImageWithFallback";
 import { Card3D } from "./components/Card3D";
 import { FloatingIcon } from "./components/FloatingIcon";
-import { InteractiveCursor } from "./components/InteractiveCursor";
 import { ParticleField } from "./components/ParticleField";
 import { SkillBar3D } from "./components/SkillBar3D";
 import { ContactForm } from "./components/ContactForm";
@@ -139,7 +138,6 @@ export default function App() {
 
   return (
     <div className="min-h-screen">
-      <InteractiveCursor />
 
       {/* Navigation */}
       <motion.nav
@@ -355,13 +353,9 @@ export default function App() {
               >
                 <Card3D>
                   <div className="p-8 h-full">
-                    <motion.div
-                      className="text-primary mb-4"
-                      whileHover={{ scale: 1.2, rotate: 360 }}
-                      transition={{ duration: 0.6 }}
-                    >
+                    <div className="text-primary mb-4">
                       {service.icon}
-                    </motion.div>
+                    </div>
                     <h3 className="text-2xl mb-3">{t(service.titleKey)}</h3>
                     <p className="text-muted-foreground mb-6">{t(service.descriptionKey)}</p>
                     <ul className="space-y-2">
