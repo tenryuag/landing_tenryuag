@@ -18,7 +18,7 @@ export function ParticleBackground3D({ scrollProgress }: ParticleBackground3DPro
   const geometriesRef = useRef<{
     mobius: Float32Array;
     tesseract: Float32Array;
-    dragon: Float32Array;
+    cube: Float32Array;
   } | null>(null);
 
   // Generar geometría de Banda de Möbius
@@ -40,51 +40,22 @@ export function ParticleBackground3D({ scrollProgress }: ParticleBackground3DPro
     return positions;
   };
 
-  // Generar geometría de Teseracto (proyección 4D a 3D)
+  // Generar geometría de Teseracto (proyección 4D a 3D con volumen)
   const generateTesseract = (particleCount: number): Float32Array => {
     const positions = new Float32Array(particleCount * 3);
-    const vertices4D: number[][] = [];
 
-    // Generar vértices del hipercubo 4D
-    for (let i = 0; i < 16; i++) {
-      vertices4D.push([
-        (i & 1) ? 1.5 : -1.5,
-        (i & 2) ? 1.5 : -1.5,
-        (i & 4) ? 1.5 : -1.5,
-        (i & 8) ? 1.5 : -1.5,
-      ]);
-    }
-
-    // Generar aristas del hipercubo
-    const edges: [number, number][] = [];
-    for (let i = 0; i < 16; i++) {
-      for (let j = i + 1; j < 16; j++) {
-        let diff = 0;
-        for (let k = 0; k < 4; k++) {
-          if (vertices4D[i][k] !== vertices4D[j][k]) diff++;
-        }
-        if (diff === 1) edges.push([i, j]);
-      }
-    }
-
-    // Distribuir partículas a lo largo de las aristas
+    // Generar partículas en el volumen del hipercubo 4D
     for (let i = 0; i < particleCount; i++) {
-      const edgeIndex = Math.floor((i / particleCount) * edges.length) % edges.length;
-      const [v1Idx, v2Idx] = edges[edgeIndex];
-      const t = (i % (particleCount / edges.length)) / (particleCount / edges.length);
-
-      const v1 = vertices4D[v1Idx];
-      const v2 = vertices4D[v2Idx];
+      // Coordenadas aleatorias en el hipercubo 4D [-1.5, 1.5]
+      const v = [
+        (Math.random() - 0.5) * 3,
+        (Math.random() - 0.5) * 3,
+        (Math.random() - 0.5) * 3,
+        (Math.random() - 0.5) * 3,
+      ];
 
       // Proyección estereográfica 4D -> 3D
       const w = 0.8;
-      const v = [
-        v1[0] + (v2[0] - v1[0]) * t,
-        v1[1] + (v2[1] - v1[1]) * t,
-        v1[2] + (v2[2] - v1[2]) * t,
-        v1[3] + (v2[3] - v1[3]) * t,
-      ];
-
       const scale = 1.8 / (3 - v[3] * w);
 
       positions[i * 3] = v[0] * scale;
@@ -94,65 +65,84 @@ export function ParticleBackground3D({ scrollProgress }: ParticleBackground3DPro
     return positions;
   };
 
-  // Generar geometría de Dragón (curva fractal)
-  const generateDragon = (particleCount: number): Float32Array => {
+  // Generar geometría de Cubo (caja que rodea)
+  const generateCube = (particleCount: number): Float32Array => {
     const positions = new Float32Array(particleCount * 3);
-    const dragonCurve: [number, number][] = [];
+    const size = 3.5; // Tamaño del cubo
 
-    let x = 0, y = 0;
-    let angle = 0;
-    const step = 0.08;
+    // Definir las 12 aristas del cubo
+    const edges: [number[], number[]][] = [
+      // Cara frontal
+      [[-size, -size, size], [size, -size, size]],
+      [[size, -size, size], [size, size, size]],
+      [[size, size, size], [-size, size, size]],
+      [[-size, size, size], [-size, -size, size]],
+      // Cara trasera
+      [[-size, -size, -size], [size, -size, -size]],
+      [[size, -size, -size], [size, size, -size]],
+      [[size, size, -size], [-size, size, -size]],
+      [[-size, size, -size], [-size, -size, -size]],
+      // Conectores entre caras
+      [[-size, -size, -size], [-size, -size, size]],
+      [[size, -size, -size], [size, -size, size]],
+      [[size, size, -size], [size, size, size]],
+      [[-size, size, -size], [-size, size, size]],
+    ];
 
-    // Generar curva del dragón con iteraciones
-    const iterations = 12;
-    let commands = 'FX';
+    // Distribuir partículas a lo largo de las aristas del cubo
+    const particlesPerEdge = Math.floor(particleCount / edges.length);
+    let particleIndex = 0;
 
-    for (let i = 0; i < iterations; i++) {
-      commands = commands
-        .replace(/X/g, 'X+YF+')
-        .replace(/Y/g, '-FX-Y');
-    }
+    for (const [start, end] of edges) {
+      for (let i = 0; i < particlesPerEdge && particleIndex < particleCount; i++) {
+        const t = i / particlesPerEdge;
 
-    dragonCurve.push([x, y]);
+        positions[particleIndex * 3] = start[0] + (end[0] - start[0]) * t;
+        positions[particleIndex * 3 + 1] = start[1] + (end[1] - start[1]) * t;
+        positions[particleIndex * 3 + 2] = start[2] + (end[2] - start[2]) * t;
 
-    for (const cmd of commands) {
-      if (cmd === 'F') {
-        x += Math.cos(angle) * step;
-        y += Math.sin(angle) * step;
-        dragonCurve.push([x, y]);
-      } else if (cmd === '+') {
-        angle += Math.PI / 2;
-      } else if (cmd === '-') {
-        angle -= Math.PI / 2;
+        particleIndex++;
       }
     }
 
-    // Normalizar y centrar la curva
-    let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
-    for (const [px, py] of dragonCurve) {
-      if (px < minX) minX = px;
-      if (px > maxX) maxX = px;
-      if (py < minY) minY = py;
-      if (py > maxY) maxY = py;
-    }
+    // Llenar partículas restantes con puntos aleatorios en las caras
+    for (let i = particleIndex; i < particleCount; i++) {
+      const face = Math.floor(Math.random() * 6);
+      const u = (Math.random() - 0.5) * size * 2;
+      const v = (Math.random() - 0.5) * size * 2;
 
-    const centerX = (minX + maxX) / 2;
-    const centerY = (minY + maxY) / 2;
-    const scaleVal = 4 / Math.max(maxX - minX, maxY - minY);
-
-    // Distribuir partículas a lo largo de la curva
-    for (let i = 0; i < particleCount; i++) {
-      const t = (i / particleCount) * (dragonCurve.length - 1);
-      const idx = Math.floor(t);
-      const nextIdx = Math.min(idx + 1, dragonCurve.length - 1);
-      const alpha = t - idx;
-
-      const p1 = dragonCurve[idx];
-      const p2 = dragonCurve[nextIdx];
-
-      positions[i * 3] = ((p1[0] + (p2[0] - p1[0]) * alpha) - centerX) * scaleVal;
-      positions[i * 3 + 1] = ((p1[1] + (p2[1] - p1[1]) * alpha) - centerY) * scaleVal;
-      positions[i * 3 + 2] = (Math.random() - 0.5) * 1.5;
+      switch (face) {
+        case 0: // Frontal
+          positions[i * 3] = u;
+          positions[i * 3 + 1] = v;
+          positions[i * 3 + 2] = size;
+          break;
+        case 1: // Trasera
+          positions[i * 3] = u;
+          positions[i * 3 + 1] = v;
+          positions[i * 3 + 2] = -size;
+          break;
+        case 2: // Derecha
+          positions[i * 3] = size;
+          positions[i * 3 + 1] = u;
+          positions[i * 3 + 2] = v;
+          break;
+        case 3: // Izquierda
+          positions[i * 3] = -size;
+          positions[i * 3 + 1] = u;
+          positions[i * 3 + 2] = v;
+          break;
+        case 4: // Superior
+          positions[i * 3] = u;
+          positions[i * 3 + 1] = size;
+          positions[i * 3 + 2] = v;
+          break;
+        case 5: // Inferior
+          positions[i * 3] = u;
+          positions[i * 3 + 1] = -size;
+          positions[i * 3 + 2] = v;
+          break;
+      }
     }
 
     return positions;
@@ -226,7 +216,7 @@ export function ParticleBackground3D({ scrollProgress }: ParticleBackground3DPro
     geometriesRef.current = {
       mobius: generateMobiusStrip(particleCount),
       tesseract: generateTesseract(particleCount),
-      dragon: generateDragon(particleCount),
+      cube: generateCube(particleCount),
     };
 
     let lastMouseX = 0;
@@ -295,7 +285,7 @@ export function ParticleBackground3D({ scrollProgress }: ParticleBackground3DPro
 
       // Determinar qué geometría mostrar según el scroll
       let currentPositions: Float32Array;
-      const { mobius, tesseract, dragon } = geometriesRef.current;
+      const { mobius, tesseract, cube } = geometriesRef.current;
       const currentScrollProgress = scrollProgressRef.current;
 
       if (currentScrollProgress < 0.33) {
@@ -303,13 +293,13 @@ export function ParticleBackground3D({ scrollProgress }: ParticleBackground3DPro
         const alpha = currentScrollProgress / 0.33;
         currentPositions = interpolateGeometries(mobius, tesseract, alpha);
       } else if (currentScrollProgress < 0.66) {
-        // Transición de Teseracto a Dragón
+        // Transición de Teseracto a Cubo
         const alpha = (currentScrollProgress - 0.33) / 0.33;
-        currentPositions = interpolateGeometries(tesseract, dragon, alpha);
+        currentPositions = interpolateGeometries(tesseract, cube, alpha);
       } else {
-        // Mantener Dragón con pequeña variación
+        // Mantener Cubo con pequeña variación
         const alpha = Math.min((currentScrollProgress - 0.66) / 0.34, 1);
-        currentPositions = dragon;
+        currentPositions = cube;
 
         // Añadir un pequeño efecto de "completitud"
         particles.material.opacity = 0.7 + alpha * 0.3;
