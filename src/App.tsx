@@ -28,14 +28,24 @@ import { ParticleField } from "./components/ParticleField";
 import { SkillBar3D } from "./components/SkillBar3D";
 import { ContactForm } from "./components/ContactForm";
 import { LanguageSwitcher } from "./components/LanguageSwitcher";
+import { ParticleBackground3D } from "./components/ParticleBackground3D";
 
 export default function App() {
   const { t } = useTranslation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
+  const [scrollProgress, setScrollProgress] = useState(0);
   const { scrollYProgress } = useScroll();
   const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
   const scale = useTransform(scrollYProgress, [0, 0.2], [1, 0.95]);
+
+  // Actualizar scroll progress para las partículas
+  useEffect(() => {
+    const unsubscribe = scrollYProgress.on('change', (latest) => {
+      setScrollProgress(latest);
+    });
+    return () => unsubscribe();
+  }, [scrollYProgress]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -137,11 +147,13 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen relative">
+      {/* Fondo de partículas 3D */}
+      <ParticleBackground3D scrollProgress={scrollProgress} />
 
       {/* Navigation */}
       <motion.nav
-        className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border"
+        className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border relative"
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.5 }}
@@ -214,7 +226,7 @@ export default function App() {
       {/* Hero Section */}
       <section
         id="home"
-        className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 min-h-screen flex items-center"
+        className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 min-h-screen flex items-center relative"
       >
         <div className="max-w-7xl mx-auto w-full">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -322,7 +334,7 @@ export default function App() {
       {/* Services Section */}
       <section
         id="services"
-        className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/30 relative overflow-hidden"
+        className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/30 relative overflow-hidden z-10"
       >
         <ParticleField />
         <div className="max-w-7xl mx-auto relative z-10">
@@ -375,7 +387,7 @@ export default function App() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-20 px-4 sm:px-6 lg:px-8">
+      <section id="about" className="py-20 px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -430,7 +442,7 @@ export default function App() {
       </section>
 
       {/* Projects Section */}
-      <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/30">
+      <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/30 relative z-10">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -484,7 +496,7 @@ export default function App() {
       </section>
 
       {/* Testimonials Section */}
-      <section id="testimonials" className="py-20 px-4 sm:px-6 lg:px-8">
+      <section id="testimonials" className="py-20 px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -526,7 +538,7 @@ export default function App() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/30">
+      <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/30 relative z-10">
         <div className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -588,7 +600,7 @@ export default function App() {
       </section>
 
       {/* Footer */}
-      <footer className="py-8 px-4 sm:px-6 lg:px-8 border-t border-border">
+      <footer className="py-8 px-4 sm:px-6 lg:px-8 border-t border-border relative z-10">
         <div className="max-w-7xl mx-auto text-center text-muted-foreground">
           <p>{t('footer.copyright')}</p>
         </div>
