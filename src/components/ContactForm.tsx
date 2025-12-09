@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
@@ -27,6 +28,7 @@ interface ContactFormProps {
 }
 
 export function ContactForm({ onSubmit }: ContactFormProps) {
+  const { t } = useTranslation();
   const [currentStep, setCurrentStep] = useState(1);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [formData, setFormData] = useState<FormData>({
@@ -50,27 +52,27 @@ export function ContactForm({ onSubmit }: ContactFormProps) {
 
     if (step === 1) {
       if (!formData.nombre.trim()) {
-        newErrors.nombre = "El nombre es obligatorio";
+        newErrors.nombre = t('contact.form.step1.nameRequired');
       }
       if (!formData.email.trim()) {
-        newErrors.email = "El email es obligatorio";
+        newErrors.email = t('contact.form.step1.emailRequired');
       } else if (!validateEmail(formData.email)) {
-        newErrors.email = "El email no es válido";
+        newErrors.email = t('contact.form.step1.emailInvalid');
       }
     }
 
     if (step === 2) {
       if (!formData.tipoSolucion) {
-        newErrors.tipoSolucion = "Selecciona una opción";
+        newErrors.tipoSolucion = t('contact.form.step2.solutionTypeRequired');
       }
       if (!formData.claridad) {
-        newErrors.claridad = "Selecciona una opción";
+        newErrors.claridad = t('contact.form.step2.clarityRequired');
       }
     }
 
     if (step === 3) {
       if (!formData.prioridad) {
-        newErrors.prioridad = "Selecciona una opción";
+        newErrors.prioridad = t('contact.form.step3.priorityRequired');
       }
     }
 
@@ -114,7 +116,7 @@ export function ContactForm({ onSubmit }: ContactFormProps) {
       <div className="mb-8">
         <div className="flex justify-between items-center mb-2">
           <span className="text-sm font-medium text-foreground/70">
-            Paso {currentStep} de {totalSteps}
+            {t('contact.form.step')} {currentStep} {t('contact.form.of')} {totalSteps}
           </span>
           <span className="text-sm font-medium text-foreground/70">
             {Math.round((currentStep / totalSteps) * 100)}%
@@ -142,21 +144,21 @@ export function ContactForm({ onSubmit }: ContactFormProps) {
         >
           <div className="space-y-2">
             <h2 className="text-2xl font-bold tracking-tight">
-              Comencemos con lo básico
+              {t('contact.form.step1.title')}
             </h2>
             <p className="text-muted-foreground">
-              Solo necesitamos algunos datos para contactarte
+              {t('contact.form.step1.description')}
             </p>
           </div>
 
           <div className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="nombre" className="text-sm font-semibold">
-                Nombre completo
+                {t('contact.form.step1.name')}
               </Label>
               <Input
                 id="nombre"
-                placeholder="Tu nombre"
+                placeholder={t('contact.form.step1.namePlaceholder')}
                 value={formData.nombre}
                 onChange={(e) => updateFormData("nombre", e.target.value)}
                 aria-invalid={!!errors.nombre}
@@ -172,12 +174,12 @@ export function ContactForm({ onSubmit }: ContactFormProps) {
 
             <div className="space-y-2">
               <Label htmlFor="email" className="text-sm font-semibold">
-                Email
+                {t('contact.form.step1.email')}
               </Label>
               <Input
                 id="email"
                 type="email"
-                placeholder="tu@empresa.com"
+                placeholder={t('contact.form.step1.emailPlaceholder')}
                 value={formData.email}
                 onChange={(e) => updateFormData("email", e.target.value)}
                 aria-invalid={!!errors.email}
@@ -190,7 +192,7 @@ export function ContactForm({ onSubmit }: ContactFormProps) {
                 <p className="text-sm text-destructive">{errors.email}</p>
               )}
               <p className="text-xs text-muted-foreground">
-                Te contactaremos a este correo en menos de 24 horas
+                {t('contact.form.step1.emailHelper')}
               </p>
             </div>
           </div>
@@ -209,41 +211,41 @@ export function ContactForm({ onSubmit }: ContactFormProps) {
         >
           <div className="space-y-2">
             <h2 className="text-2xl font-bold tracking-tight">
-              ¿Qué estás buscando?
+              {t('contact.form.step2.title')}
             </h2>
             <p className="text-muted-foreground">
-              Cuéntanos un poco sobre tu proyecto
+              {t('contact.form.step2.description')}
             </p>
           </div>
 
           <div className="space-y-4">
             <FullWidthSelect
               id="tipoSolucion"
-              label="¿Qué tipo de solución buscas?"
+              label={t('contact.form.step2.solutionType')}
               value={formData.tipoSolucion}
               onChange={(value) => updateFormData("tipoSolucion", value)}
               error={errors.tipoSolucion}
-              helperText="Esto nos ayuda a asignar al especialista adecuado"
+              helperText={t('contact.form.step2.solutionTypeHelper')}
               options={[
-                { value: "desarrollo", label: "Desarrollo de App / Web" },
-                { value: "automatizacion", label: "Automatización con IA" },
-                { value: "sistema", label: "Sistema a medida" },
-                { value: "consultoria", label: "Consultoría técnica" },
-                { value: "otro", label: "Otro" },
+                { value: "desarrollo", label: t('contact.form.step2.solutionTypes.development') },
+                { value: "automatizacion", label: t('contact.form.step2.solutionTypes.automation') },
+                { value: "sistema", label: t('contact.form.step2.solutionTypes.system') },
+                { value: "consultoria", label: t('contact.form.step2.solutionTypes.consulting') },
+                { value: "otro", label: t('contact.form.step2.solutionTypes.other') },
               ]}
             />
 
             <FullWidthSelect
               id="claridad"
-              label="¿Qué tan claro tienes tu problema?"
+              label={t('contact.form.step2.clarity')}
               value={formData.claridad}
               onChange={(value) => updateFormData("claridad", value)}
               error={errors.claridad}
-              helperText="No te preocupes, te ayudaremos a definirlo mejor"
+              helperText={t('contact.form.step2.clarityHelper')}
               options={[
-                { value: "claro", label: "Tengo claro el problema" },
-                { value: "idea", label: "Tengo una idea, pero no sé cómo resolverla" },
-                { value: "explorar", label: "No sé exactamente, pero quiero mejorar mis procesos" },
+                { value: "claro", label: t('contact.form.step2.clarityLevels.clear') },
+                { value: "idea", label: t('contact.form.step2.clarityLevels.idea') },
+                { value: "explorar", label: t('contact.form.step2.clarityLevels.explore') },
               ]}
             />
           </div>
@@ -260,47 +262,46 @@ export function ContactForm({ onSubmit }: ContactFormProps) {
         >
           <div className="space-y-2">
             <h2 className="text-2xl font-bold tracking-tight">
-              Últimos detalles
+              {t('contact.form.step3.title')}
             </h2>
             <p className="text-muted-foreground">
-              Esto nos ayudará a personalizar nuestra propuesta
+              {t('contact.form.step3.description')}
             </p>
           </div>
 
           <div className="space-y-4">
             <FullWidthSelect
               id="prioridad"
-              label="¿Cuál es tu prioridad principal?"
+              label={t('contact.form.step3.priority')}
               value={formData.prioridad}
               onChange={(value) => updateFormData("prioridad", value)}
               error={errors.prioridad}
-              helperText="Optimizaremos nuestra solución según tu prioridad"
+              helperText={t('contact.form.step3.priorityHelper')}
               options={[
-                { value: "rapido", label: "Lanzar rápido" },
-                { value: "costos", label: "Reducir costos" },
-                { value: "automatizar", label: "Automatizar procesos" },
-                { value: "experiencia", label: "Mejorar diseño / experiencia" },
-                { value: "integrar", label: "Integrar sistemas existentes" },
+                { value: "rapido", label: t('contact.form.step3.priorities.fast') },
+                { value: "costos", label: t('contact.form.step3.priorities.costs') },
+                { value: "automatizar", label: t('contact.form.step3.priorities.automate') },
+                { value: "experiencia", label: t('contact.form.step3.priorities.experience') },
+                { value: "integrar", label: t('contact.form.step3.priorities.integrate') },
               ]}
             />
 
             <div className="space-y-2">
               <Label htmlFor="mensaje" className="text-sm font-semibold">
-                Mensaje breve{" "}
+                {t('contact.form.step3.message')}{" "}
                 <span className="text-muted-foreground font-normal">
-                  (opcional)
+                  {t('contact.form.step3.messageOptional')}
                 </span>
               </Label>
               <Textarea
                 id="mensaje"
-                placeholder="Cuéntanos un poco más sobre tu proyecto o necesidad..."
+                placeholder={t('contact.form.step3.messagePlaceholder')}
                 value={formData.mensaje}
                 onChange={(e) => updateFormData("mensaje", e.target.value)}
                 className="border-2 min-h-24 resize-none text-base bg-background"
               />
               <p className="text-xs text-muted-foreground">
-                Cualquier detalle adicional nos ayuda a preparar mejor nuestra
-                llamada
+                {t('contact.form.step3.messageHelper')}
               </p>
             </div>
           </div>
@@ -328,7 +329,7 @@ export function ContactForm({ onSubmit }: ContactFormProps) {
                   d="M15 19l-7-7 7-7"
                 />
               </svg>
-              Anterior
+              {t('contact.form.previous')}
             </Button>
           )}
 
@@ -338,7 +339,7 @@ export function ContactForm({ onSubmit }: ContactFormProps) {
               onClick={handleNext}
               className="ml-auto gap-2"
             >
-              Siguiente
+              {t('contact.form.next')}
               <svg
                 className="size-4"
                 fill="none"
@@ -355,7 +356,7 @@ export function ContactForm({ onSubmit }: ContactFormProps) {
             </Button>
           ) : (
             <Button type="submit" className="ml-auto gap-2">
-              Enviar mensaje
+              {t('contact.form.submit')}
               <svg
                 className="size-4"
                 fill="none"
@@ -377,7 +378,7 @@ export function ContactForm({ onSubmit }: ContactFormProps) {
       {/* Success Feedback - Optional */}
       <div className="mt-6 text-center">
         <p className="text-xs text-muted-foreground">
-          🔒 Tus datos están protegidos y nunca serán compartidos
+          {t('contact.form.privacy')}
         </p>
       </div>
     </div>
