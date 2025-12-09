@@ -194,7 +194,7 @@ export function ParticleBackground3D({ scrollProgress }: ParticleBackground3DPro
     rendererRef.current = renderer;
 
     // Crear partículas
-    const particleCount = 5000;
+    const particleCount = 10000;
     const geometry = new THREE.BufferGeometry();
     const positions = generateMobiusStrip(particleCount);
     geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
