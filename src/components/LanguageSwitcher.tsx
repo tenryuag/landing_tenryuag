@@ -6,7 +6,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from './ui/dropdown-menu';
-import { Languages } from 'lucide-react';
+import { Globe } from 'lucide-react';
 
 const languages = [
   { code: 'es', name: 'Español', flag: '🇪🇸' },
@@ -21,13 +21,15 @@ export function LanguageSwitcher() {
     i18n.changeLanguage(lng);
   };
 
-  const currentLanguage = languages.find((lang) => lang.code === i18n.language) || languages[0];
+  // Obtener el código de idioma actual (puede ser 'es', 'en-US', etc.)
+  const currentLangCode = i18n.language.split('-')[0];
+  const currentLanguage = languages.find((lang) => lang.code === currentLangCode) || languages[0];
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="outline" size="sm" className="gap-2">
-          <Languages className="w-4 h-4" />
+          <Globe className="w-4 h-4" />
           <span className="hidden sm:inline">{currentLanguage.flag}</span>
         </Button>
       </DropdownMenuTrigger>
@@ -36,7 +38,7 @@ export function LanguageSwitcher() {
           <DropdownMenuItem
             key={lang.code}
             onClick={() => changeLanguage(lang.code)}
-            className={`cursor-pointer ${i18n.language === lang.code ? 'bg-accent' : ''}`}
+            className={`cursor-pointer ${currentLangCode === lang.code ? 'bg-accent' : ''}`}
           >
             <span className="mr-2">{lang.flag}</span>
             {lang.name}

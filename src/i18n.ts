@@ -16,6 +16,8 @@ i18n
       ja: { translation: ja },
     },
     fallbackLng: 'es', // Idioma por defecto
+    supportedLngs: ['es', 'en', 'ja'], // Idiomas soportados
+    load: 'languageOnly', // Cargar solo 'en' en lugar de 'en-US'
     debug: false,
     interpolation: {
       escapeValue: false, // React ya protege contra XSS
@@ -25,6 +27,9 @@ i18n
       order: ['localStorage', 'navigator'],
       caches: ['localStorage'], // Guarda la preferencia del usuario
       lookupLocalStorage: 'i18nextLng',
+    },
+    react: {
+      useSuspense: false, // Desactivar suspense para evitar problemas de carga
     },
   });
 
