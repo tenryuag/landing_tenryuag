@@ -18,7 +18,7 @@ export function ParticleBackground3D({ scrollProgress }: ParticleBackground3DPro
   const geometriesRef = useRef<{
     sphere: Float32Array;
     tesseract: Float32Array;
-    cube: Float32Array;
+    tesseract2: Float32Array;
   } | null>(null);
 
   // Generar geometría de Esfera (planeta)
@@ -66,86 +66,28 @@ export function ParticleBackground3D({ scrollProgress }: ParticleBackground3DPro
     return positions;
   };
 
-  // Generar geometría de Cubo (caja que rodea)
-  const generateCube = (particleCount: number): Float32Array => {
+  // Generar geometría de Teseracto 2 (versión expandida para contacto)
+  const generateTesseract2 = (particleCount: number): Float32Array => {
     const positions = new Float32Array(particleCount * 3);
-    const size = 3.5; // Tamaño del cubo
 
-    // Definir las 12 aristas del cubo
-    const edges: [number[], number[]][] = [
-      // Cara frontal
-      [[-size, -size, size], [size, -size, size]],
-      [[size, -size, size], [size, size, size]],
-      [[size, size, size], [-size, size, size]],
-      [[-size, size, size], [-size, -size, size]],
-      // Cara trasera
-      [[-size, -size, -size], [size, -size, -size]],
-      [[size, -size, -size], [size, size, -size]],
-      [[size, size, -size], [-size, size, -size]],
-      [[-size, size, -size], [-size, -size, -size]],
-      // Conectores entre caras
-      [[-size, -size, -size], [-size, -size, size]],
-      [[size, -size, -size], [size, -size, size]],
-      [[size, size, -size], [size, size, size]],
-      [[-size, size, -size], [-size, size, size]],
-    ];
+    // Generar partículas en el volumen del hipercubo 4D (más grande)
+    for (let i = 0; i < particleCount; i++) {
+      // Coordenadas aleatorias en el hipercubo 4D con mayor rango
+      const v = [
+        (Math.random() - 0.5) * 4.5,
+        (Math.random() - 0.5) * 4.5,
+        (Math.random() - 0.5) * 4.5,
+        (Math.random() - 0.5) * 4.5,
+      ];
 
-    // Distribuir partículas a lo largo de las aristas del cubo
-    const particlesPerEdge = Math.floor(particleCount / edges.length);
-    let particleIndex = 0;
+      // Proyección estereográfica 4D -> 3D con parámetros ajustados
+      const w = 0.6;
+      const scale = 2.2 / (3 - v[3] * w);
 
-    for (const [start, end] of edges) {
-      for (let i = 0; i < particlesPerEdge && particleIndex < particleCount; i++) {
-        const t = i / particlesPerEdge;
-
-        positions[particleIndex * 3] = start[0] + (end[0] - start[0]) * t;
-        positions[particleIndex * 3 + 1] = start[1] + (end[1] - start[1]) * t;
-        positions[particleIndex * 3 + 2] = start[2] + (end[2] - start[2]) * t;
-
-        particleIndex++;
-      }
+      positions[i * 3] = v[0] * scale;
+      positions[i * 3 + 1] = v[1] * scale;
+      positions[i * 3 + 2] = v[2] * scale;
     }
-
-    // Llenar partículas restantes con puntos aleatorios en las caras
-    for (let i = particleIndex; i < particleCount; i++) {
-      const face = Math.floor(Math.random() * 6);
-      const u = (Math.random() - 0.5) * size * 2;
-      const v = (Math.random() - 0.5) * size * 2;
-
-      switch (face) {
-        case 0: // Frontal
-          positions[i * 3] = u;
-          positions[i * 3 + 1] = v;
-          positions[i * 3 + 2] = size;
-          break;
-        case 1: // Trasera
-          positions[i * 3] = u;
-          positions[i * 3 + 1] = v;
-          positions[i * 3 + 2] = -size;
-          break;
-        case 2: // Derecha
-          positions[i * 3] = size;
-          positions[i * 3 + 1] = u;
-          positions[i * 3 + 2] = v;
-          break;
-        case 3: // Izquierda
-          positions[i * 3] = -size;
-          positions[i * 3 + 1] = u;
-          positions[i * 3 + 2] = v;
-          break;
-        case 4: // Superior
-          positions[i * 3] = u;
-          positions[i * 3 + 1] = size;
-          positions[i * 3 + 2] = v;
-          break;
-        case 5: // Inferior
-          positions[i * 3] = u;
-          positions[i * 3 + 1] = -size;
-          positions[i * 3 + 2] = v;
-          break;
-      }
-    }
-
     return positions;
   };
 
@@ -201,7 +143,7 @@ export function ParticleBackground3D({ scrollProgress }: ParticleBackground3DPro
     geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
 
     const material = new THREE.PointsMaterial({
-      color: 0x6366f1,
+      color: 0x8B9D83, // Verde Japandi
       size: 0.025,
       transparent: true,
       opacity: 0.7,
@@ -217,7 +159,7 @@ export function ParticleBackground3D({ scrollProgress }: ParticleBackground3DPro
     geometriesRef.current = {
       sphere: generateSphere(particleCount),
       tesseract: generateTesseract(particleCount),
-      cube: generateCube(particleCount),
+      tesseract2: generateTesseract2(particleCount),
     };
 
     let lastMouseX = 0;
@@ -286,7 +228,7 @@ export function ParticleBackground3D({ scrollProgress }: ParticleBackground3DPro
 
       // Determinar qué geometría mostrar según el scroll
       let currentPositions: Float32Array;
-      const { sphere, tesseract, cube } = geometriesRef.current;
+      const { sphere, tesseract, tesseract2 } = geometriesRef.current;
       const currentScrollProgress = scrollProgressRef.current;
 
       if (currentScrollProgress < 0.33) {
@@ -294,13 +236,13 @@ export function ParticleBackground3D({ scrollProgress }: ParticleBackground3DPro
         const alpha = currentScrollProgress / 0.33;
         currentPositions = interpolateGeometries(sphere, tesseract, alpha);
       } else if (currentScrollProgress < 0.66) {
-        // Transición de Teseracto a Cubo
+        // Transición de Teseracto a Teseracto 2
         const alpha = (currentScrollProgress - 0.33) / 0.33;
-        currentPositions = interpolateGeometries(tesseract, cube, alpha);
+        currentPositions = interpolateGeometries(tesseract, tesseract2, alpha);
       } else {
-        // Mantener Cubo con pequeña variación
+        // Mantener Teseracto 2 con pequeña variación
         const alpha = Math.min((currentScrollProgress - 0.66) / 0.34, 1);
-        currentPositions = cube;
+        currentPositions = tesseract2;
 
         // Añadir un pequeño efecto de "completitud"
         particles.material.opacity = 0.7 + alpha * 0.3;
