@@ -173,8 +173,10 @@
       "previous": "Anterior",
       "next": "Siguiente",
       "submit": "Enviar mensaje",
+      "sending": "Enviando...",
       "privacy": "🔒 Tus datos están protegidos y nunca serán compartidos",
-      "successMessage": "¡Gracias! Te contactaremos pronto."
+      "successMessage": "¡Mensaje enviado con éxito! Te contactaremos pronto.",
+      "errorMessage": "Hubo un error al enviar el mensaje. Por favor intenta de nuevo."
     }
   },
   "footer": {
