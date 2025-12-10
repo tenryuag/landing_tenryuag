@@ -137,7 +137,7 @@ export function ParticleBackground3D({ scrollProgress }: ParticleBackground3DPro
     rendererRef.current = renderer;
 
     // Crear partículas
-    const particleCount = 10000;
+    const particleCount = 40000;
     const geometry = new THREE.BufferGeometry();
     const positions = generateSphere(particleCount);
     geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
