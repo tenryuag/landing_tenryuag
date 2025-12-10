@@ -16,26 +16,27 @@ export function ParticleBackground3D({ scrollProgress }: ParticleBackground3DPro
   const mouseVelocityRef = useRef({ x: 0, y: 0 });
   const scrollProgressRef = useRef(0);
   const geometriesRef = useRef<{
-    mobius: Float32Array;
+    sphere: Float32Array;
     tesseract: Float32Array;
     cube: Float32Array;
   } | null>(null);
 
-  // Generar geometría de Banda de Möbius
-  const generateMobiusStrip = (particleCount: number): Float32Array => {
+  // Generar geometría de Esfera (planeta)
+  const generateSphere = (particleCount: number): Float32Array => {
     const positions = new Float32Array(particleCount * 3);
+    const radius = 2.5;
+
     for (let i = 0; i < particleCount; i++) {
-      const u = (i / particleCount) * Math.PI * 4;
-      const t = (Math.random() - 0.5) * 0.8;
+      // Distribución uniforme en una esfera usando el método de Fibonacci
+      const phi = Math.acos(1 - 2 * (i + 0.5) / particleCount);
+      const theta = Math.PI * (1 + Math.sqrt(5)) * i;
 
-      const R = 2;
-      const x = (R + t * Math.cos(u / 2)) * Math.cos(u);
-      const y = (R + t * Math.cos(u / 2)) * Math.sin(u);
-      const z = t * Math.sin(u / 2);
+      // Añadir variación en el radio para efecto de volumen y atmósfera
+      const r = radius * (0.7 + Math.random() * 0.3);
 
-      positions[i * 3] = x;
-      positions[i * 3 + 1] = y;
-      positions[i * 3 + 2] = z;
+      positions[i * 3] = r * Math.sin(phi) * Math.cos(theta);
+      positions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
+      positions[i * 3 + 2] = r * Math.cos(phi);
     }
     return positions;
   };
@@ -196,7 +197,7 @@ export function ParticleBackground3D({ scrollProgress }: ParticleBackground3DPro
     // Crear partículas
     const particleCount = 10000;
     const geometry = new THREE.BufferGeometry();
-    const positions = generateMobiusStrip(particleCount);
+    const positions = generateSphere(particleCount);
     geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
 
     const material = new THREE.PointsMaterial({
@@ -214,7 +215,7 @@ export function ParticleBackground3D({ scrollProgress }: ParticleBackground3DPro
 
     // Generar y almacenar todas las geometrías
     geometriesRef.current = {
-      mobius: generateMobiusStrip(particleCount),
+      sphere: generateSphere(particleCount),
       tesseract: generateTesseract(particleCount),
       cube: generateCube(particleCount),
     };
@@ -285,13 +286,13 @@ export function ParticleBackground3D({ scrollProgress }: ParticleBackground3DPro
 
       // Determinar qué geometría mostrar según el scroll
       let currentPositions: Float32Array;
-      const { mobius, tesseract, cube } = geometriesRef.current;
+      const { sphere, tesseract, cube } = geometriesRef.current;
       const currentScrollProgress = scrollProgressRef.current;
 
       if (currentScrollProgress < 0.33) {
-        // Transición de Möbius a Teseracto
+        // Transición de Esfera a Teseracto
         const alpha = currentScrollProgress / 0.33;
-        currentPositions = interpolateGeometries(mobius, tesseract, alpha);
+        currentPositions = interpolateGeometries(sphere, tesseract, alpha);
       } else if (currentScrollProgress < 0.66) {
         // Transición de Teseracto a Cubo
         const alpha = (currentScrollProgress - 0.33) / 0.33;
