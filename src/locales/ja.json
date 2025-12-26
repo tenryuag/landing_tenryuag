@@ -3,181 +3,174 @@
     "home": "ホーム",
     "services": "サービス",
     "about": "私について",
-    "projects": "プロジェクト",
+    "projects": "実例",
     "testimonials": "お客様の声",
     "contact": "お問い合わせ",
-    "contactMe": "お問い合わせ"
+    "contactMe": "運用調和診断を予約する"
   },
   "hero": {
     "badge": "自動化とカスタムシステム",
-    "title": "明確なフロー。",
-    "subtitle1": "安定した運用。",
-    "subtitle2": "すべてのプロセスに調和を。",
-    "description": "Excelの混乱と手動プロセスを、時間を解放し、エラーを減らし、運用に明確さと調和を取り戻す自動的で集中化された洗練されたシステムに変換します。",
-    "startProject": "プロジェクトを始める",
-    "seeHowIWork": "仕事の進め方を見る",
+    "title": "業務の混沌を",
+    "subtitle1": "フローと明確さに変える、",
+    "subtitle2": "今動いているものを壊さずに。",
+    "description": "TenryuAGは、自動化、ソフトウェア、技術投資を行う前のセキュリティフィルターです。システムに技術を追加する前に、中小企業のオーナーがビジネスのコントロールを取り戻すのを支援します。",
+    "startProject": "運用調和診断を予約する",
+    "seeHowIWork": "サービスを見る",
     "stats": {
-      "projects": "完了したプロジェクト",
-      "satisfaction": "顧客満足度",
-      "experience": "日本での経験年数"
+      "projects": "インパクト対労力",
+      "satisfaction": "完全なコントロール",
+      "experience": "何も壊さない"
     }
   },
   "services": {
     "badge": "サービス",
-    "title": "混沌からフローへ、ステップバイステップ",
-    "description": "終わりのないExcelから自動的で明確な調和のとれたシステムへとビジネスを導く3つのサービス。",
+    "title": "整理、近代化、維持するための正しい階段",
+    "description": "理解していないものを自動化することはできません。整理されていないものを拡大することはできません。",
     "map": {
       "title": "運用調和マップ",
-      "description": "現在の混乱を理解し、明確な自動化計画を描くための戦略的診断。",
+      "description": "診断（入り口）。理論的なコンサルティングではありません。現在の業務（AS-IS）の視覚的かつ構造的なマッピングです。",
       "features": [
-        "プロセス、Excel、WhatsApp/LINE、手動タスクのレビュー",
-        "ボトルネックと重大なエラーの特定",
-        "優先順位付けされた自動化機会のマップ",
-        "混乱からフローへの明確なロードマップ"
+        "インパクト対労力の明確な優先順位付け",
+        "業務を壊さないために触れてはいけない箇所の特定",
+        "ビジネス全体を一枚の画像で可視化"
       ]
     },
     "harmonyFlow": {
-      "title": "HarmonyFlowシステム",
-      "description": "終わりのないExcelを置き換え、運用を単一のフローで整理する自動的で集中化されたシステム。",
+      "title": "Harmony Flow System",
+      "description": "実装（コアサービス）。プロセスに合わせて適応するシステムと自動化の設計。その逆ではありません。",
       "features": [
-        "最新のデータベースでのデータ集中化（Supabase / PostgreSQL）",
-        "n8n + AIを使用した反復タスクの自動化",
-        "WhatsApp、LINE、Googleカレンダーなどとの統合",
-        "チーム向けのカスタム内部パネルまたはアプリ"
+        "選択的自動化（価値がある場所のみ）",
+        "特定の人への依存を減らす",
+        "既に使用しているツール（Excel、レガシーシステム）との統合"
       ]
     },
     "continuousHarmony": {
       "title": "継続的調和",
-      "description": "混乱に戻ることなくシステムがあなたと共に進化するための月次メンテナンスと最適化。",
+      "description": "保守。継続的な戦略的伴走。TenryuAGは、あなたのビジネスの秩序を守るガーディアン・アーキテクトとして機能します。",
       "features": [
-        "フローの監視とエラー修正",
-        "運用の変更に応じた調整",
-        "毎月の新しい小さな自動化",
-        "システムの継続的なサポートと改善"
+        "成長に伴う混沌の再発防止",
+        "段階的かつ制御された調整",
+        "長期的で平穏な運用"
       ]
     }
   },
   "about": {
-    "badge": "TenryuAGについて",
-    "title": "規律、創造性、調和",
-    "description1": "日本で4年以上の開発者経験を持ち、日本の規律、メキシコの創造性、最新技術を統合して、明確さ、安定性、調和を組み合わせた自動フローを作成します。",
-    "description2": "AI自動化、エンタープライズ統合、ReactとSpring Bootを使用したフルスタック開発を専門としています。金融、製造、コンサルティング分野の日本企業向けの企業プロジェクトに携わってきました。",
-    "punctualDelivery": {
-      "title": "時間厳守の納品",
-      "description": "明確で現実的な期限で、運用を尊重"
+    "badge": "私について",
+    "title": "TenryuAGの原点",
+    "description1": "私は技術の世界から来ました。長年バックエンド開発者として、システム、API、自動化を構築してきました。しかし、重要なことに気づきました：秩序のない技術は問題を解決しない。ただ加速させるだけだと。",
+    "description2": "より多くのソフトウェアを持ち...より混乱している企業を見ました。より多くの自動化...そしてより少ないコントロール。問題は技術不足ではありませんでした。業務の明確さの欠如でした。",
+    "philosophy": {
+      "title": "私たちの哲学",
+      "description": "実装して去るだけのエージェンシーではありません。私たちはあなたのシステムの守護者です。"
     },
-    "focusOnResults": {
-      "title": "結果重視",
-      "description": "混乱を減らし、重要なことに制御と時間を"
+    "differentiator": {
+      "title": "私たちの差別化",
+      "description": "専門用語は使いません。あなたのビジネスを明確で、人間的で、理解しやすい言葉で説明します。"
     }
   },
   "projects": {
     "badge": "ポートフォリオ",
-    "title": "注目のプロジェクト",
-    "description": "開発したソリューションの例",
-    "worktrack": {
-      "title": "WorkTrack – 生産注文システム",
-      "description": "注文、顧客、生産、トレーサビリティのモジュールを持つ日本企業向けの管理・追跡アプリ"
+    "title": "実例",
+    "description": "顧客のアーキタイプと実際のソリューション",
+    "caseA": {
+      "title": "ケースA – 業務的な盲目を持つ中小企業",
+      "description": "状況：巨大なExcel、推測による決定。\n解決策：運用調和マップ。\n結果：即座の明確化。オーナーは何が起きていて、何を触ってはいけないかを理解しました。"
     },
-    "reservations": {
-      "title": "自動予約システム",
-      "description": "人の介入なしに予約をスケジュール、確認、管理するWhatsApp/n8nチャットボット、Googleカレンダー統合付き"
+    "caseB": {
+      "title": "ケースB – 動いているものを壊すことへの恐怖",
+      "description": "状況：伝統的な企業、近代化への恐れ。\n解決策：Harmony Flow System（段階的な変更）。\n結果：一日も業務を止めることなく近代化。"
     },
-    "sales": {
-      "title": "販売アシスタント - 重機",
-      "description": "メッセージを受信し、自動的に見積もりを作成し、CRMにデータを登録し、PDFを送信するボット。営業フローの完全自動化"
-    },
-    "administratio": {
-      "title": "Administratioシステム – リスクマトリックス",
-      "description": "企業の運用リスクを評価、可視化、優先順位付けし、アクションを追跡するアプリ"
+    "caseC": {
+      "title": "ケースC – 成長の混沌",
+      "description": "状況：急成長しコントロールを失った。\n解決策：継続的調和。\n結果：無秩序に戻ることなく持続的な成長。"
     }
   },
   "testimonials": {
     "badge": "お客様の声",
     "title": "お客様の評価",
-    "commercialDirector": {
-      "name": "営業部長",
-      "role": "メキシコシティ",
-      "content": "TenryuAGのおかげで、反復的なタスクに時間を無駄にすることがなくなりました。今では全てが自動的に更新され、チームはついに販売に集中できるようになりました。"
+    "client1": {
+      "content": "初めて安心して眠れました。全てが直感とストレスではなくなりました。",
+      "author": "中小企業オーナー"
     },
-    "operationsManager": {
-      "name": "業務マネージャー",
-      "role": "メキシコ",
-      "content": "WhatsApp顧客サービスの80%を自動化することができました。経験は明確で、プロフェッショナルで、常に信頼できるものでした。"
+    "client2": {
+      "content": "ついに専門用語や変な言葉を使わずに私のビジネスを説明してくれる人が現れました。",
+      "author": "業務マネージャー"
     },
-    "corporateClient": {
-      "name": "企業クライアント",
-      "role": "金融セクター - 日本",
-      "content": "優れたコミュニケーション、高品質な開発、最初の週から目に見える結果。"
+    "client3": {
+      "content": "業務を壊すのが怖かった。壊されなかっただけでなく、強化されました。",
+      "author": "伝統的な企業"
     }
   },
   "contact": {
     "badge": "お問い合わせ",
-    "title": "始める準備はできましたか？",
-    "description": "今日どのように仕事をしているか教えてください。あなたのビジネスに必要なフローを一緒に設計しましょう。",
+    "title": "コントロールを取り戻す会話から始めましょう",
+    "description": "ソフトウェアの請求書から始まるのではありません。明確さから始まります。",
+    "cta": "明確化セッションを予約する",
+    "note": "信頼のメモ：販売プレッシャーはありません。まず理解し、それから提案します。",
+    "final": "TenryuAGは技術を売りません。コントロール、安全性、そして判断基準を売ります。",
     "form": {
-      "step": "ステップ",
-      "of": "/",
-      "step1": {
-        "title": "基本情報から始めましょう",
-        "description": "連絡するための情報が必要です",
-        "name": "氏名",
-        "namePlaceholder": "お名前",
-        "nameRequired": "氏名は必須です",
-        "email": "メールアドレス",
-        "emailPlaceholder": "you@company.com",
-        "emailRequired": "メールアドレスは必須です",
-        "emailInvalid": "メールアドレスが無効です",
-        "emailHelper": "24時間以内にこのメールアドレスにご連絡します"
-      },
-      "step2": {
-        "title": "何をお探しですか？",
-        "description": "プロジェクトについて少し教えてください",
-        "solutionType": "どのタイプのソリューションをお探しですか？",
-        "solutionTypeHelper": "これにより適切な専門家を割り当てることができます",
-        "solutionTypeRequired": "オプションを選択してください",
-        "solutionTypes": {
-          "development": "アプリ/Web開発",
-          "automation": "AI自動化",
-          "system": "カスタムシステム",
-          "consulting": "技術コンサルティング",
-          "other": "その他"
-        },
-        "clarity": "問題はどれくらい明確ですか？",
-        "clarityHelper": "心配しないでください、より良く定義するお手伝いをします",
-        "clarityRequired": "オプションを選択してください",
-        "clarityLevels": {
-          "clear": "問題は明確です",
-          "idea": "アイデアはありますが、解決方法がわかりません",
-          "explore": "正確にはわかりませんが、プロセスを改善したいです"
-        }
-      },
-      "step3": {
-        "title": "最後の詳細",
-        "description": "これにより提案をパーソナライズできます",
-        "priority": "主な優先事項は何ですか？",
-        "priorityHelper": "優先事項に応じてソリューションを最適化します",
-        "priorityRequired": "オプションを選択してください",
-        "priorities": {
-          "fast": "素早くローンチ",
-          "costs": "コスト削減",
-          "automate": "プロセスの自動化",
-          "experience": "デザイン/エクスペリエンスの改善",
-          "integrate": "既存システムの統合"
-        },
-        "message": "簡単なメッセージ",
-        "messageOptional": "（オプション）",
-        "messagePlaceholder": "プロジェクトやニーズについてもう少し教えてください...",
-        "messageHelper": "追加の詳細は、お電話の準備をより良くするのに役立ちます"
-      },
-      "previous": "前へ",
-      "next": "次へ",
-      "submit": "メッセージを送信",
-      "sending": "送信中...",
-      "privacy": "🔒 お客様のデータは保護され、共有されることはありません",
-      "successMessage": "メッセージが正常に送信されました！すぐにご連絡いたします。",
-      "errorMessage": "メッセージの送信中にエラーが発生しました。もう一度お試しください。"
-    }
+         "step": "ステップ",
+         "of": "/",
+         "step1": {
+           "title": "基本情報から始めましょう",
+           "description": "連絡するための情報が必要です",
+           "name": "氏名",
+           "namePlaceholder": "お名前",
+           "nameRequired": "氏名は必須です",
+           "email": "メールアドレス",
+           "emailPlaceholder": "you@company.com",
+           "emailRequired": "メールアドレスは必須です",
+           "emailInvalid": "メールアドレスが無効です",
+           "emailHelper": "24時間以内にこのメールアドレスにご連絡します"
+         },
+         "step2": {
+           "title": "何をお探しですか？",
+           "description": "プロジェクトについて少し教えてください",
+           "solutionType": "どのタイプのソリューションをお探しですか？",
+           "solutionTypeHelper": "これにより適切な専門家を割り当てることができます",
+           "solutionTypeRequired": "オプションを選択してください",
+           "solutionTypes": {
+             "development": "アプリ/Web開発",
+             "automation": "AI自動化",
+             "system": "カスタムシステム",
+             "consulting": "技術コンサルティング",
+             "other": "その他"
+           },
+           "clarity": "問題はどれくらい明確ですか？",
+           "clarityHelper": "心配しないでください、より良く定義するお手伝いをします",
+           "clarityRequired": "オプションを選択してください",
+           "clarityLevels": {
+             "clear": "問題は明確です",
+             "idea": "アイデアはありますが、解決方法がわかりません",
+             "explore": "正確にはわかりませんが、プロセスを改善したいです"
+           }
+         },
+         "step3": {
+           "title": "最後の詳細",
+           "description": "これにより提案をパーソナライズできます",
+           "priority": "主な優先事項は何ですか？",
+           "priorityHelper": "優先事項に応じてソリューションを最適化します",
+           "priorityRequired": "オプションを選択してください",
+           "priorities": {
+             "fast": "素早くローンチ",
+             "costs": "コスト削減",
+             "automate": "プロセスの自動化",
+             "experience": "デザイン/エクスペリエンスの改善",
+             "integrate": "既存システムの統合"
+           },
+           "message": "簡単なメッセージ",
+           "messageOptional": "（オプション）",
+           "messagePlaceholder": "プロジェクトやニーズについてもう少し教えてください...",
+           "messageHelper": "追加の詳細は、お電話の準備をより良くするのに役立ちます"
+         },
+         "previous": "前へ",
+         "next": "次へ",
+         "submit": "メッセージを送信",
+         "sending": "送信中...",
+         "privacy": "🔒 お客様のデータは保護され、共有されることはありません",
+         "successMessage": "メッセージが正常に送信されました！すぐにご連絡いたします。",
+         "errorMessage": "メッセージの送信中にエラーが発生しました。もう一度お試しください。"
+       }
   },
   "footer": {
     "copyright": "© 2025 TenryuAG. 全著作権所有。"
