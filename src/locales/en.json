@@ -3,181 +3,174 @@
     "home": "Home",
     "services": "Services",
     "about": "About Me",
-    "projects": "Projects",
+    "projects": "Real Cases",
     "testimonials": "Testimonials",
     "contact": "Contact",
-    "contactMe": "Contact Me"
+    "contactMe": "Schedule your Operational Harmony Diagnosis"
   },
   "hero": {
     "badge": "Automation & Custom Systems",
-    "title": "Clear flow.",
-    "subtitle1": "Stable operations.",
-    "subtitle2": "Harmony in every process.",
-    "description": "I transform Excel chaos and manual processes into automatic, centralized, and elegant systems that free up time, reduce errors, and restore clarity and harmony to your operations.",
-    "startProject": "Start Project",
-    "seeHowIWork": "See How I Work",
+    "title": "Transform operational chaos",
+    "subtitle1": "into flow and clarity,",
+    "subtitle2": "without breaking what already works.",
+    "description": "TenryuAG is the safety filter before any automation, software, or tech investment. We help SME owners regain control of their business before adding more technology to the system.",
+    "startProject": "Schedule your Operational Harmony Diagnosis",
+    "seeHowIWork": "See Services",
     "stats": {
-      "projects": "Completed projects",
-      "satisfaction": "Client satisfaction",
-      "experience": "Years of experience in Japan"
+      "projects": "Impact vs. Effort",
+      "satisfaction": "Total Control",
+      "experience": "Without breaking anything"
     }
   },
   "services": {
-    "badge": "Services",
-    "title": "From Chaos to Flow, Step by Step",
-    "description": "Three services designed to take your business from endless Excel to an automatic, clear, and harmonious system.",
+    "badge": "SERVICES",
+    "title": "The right ladder to organize, modernize, and maintain",
+    "description": "You can't automate what you don't understand. You can't scale what isn't organized.",
     "map": {
       "title": "Operational Harmony Map",
-      "description": "Strategic diagnosis to understand your current chaos and chart a clear automation plan.",
+      "description": "The Diagnosis (Entry Point). Not a theoretical consultancy. It's a visual and structural mapping of your current operation (AS-IS).",
       "features": [
-        "Review of processes, Excel, WhatsApp/LINE and manual tasks",
-        "Identification of bottlenecks and critical errors",
-        "Prioritized map of automation opportunities",
-        "Clear roadmap from chaos to flow"
+        "Clear prioritization Impact vs. Effort",
+        "Identification of what NOT to touch to avoid breaking operations",
+        "See your entire business in a single image"
       ]
     },
     "harmonyFlow": {
-      "title": "HarmonyFlow System",
-      "description": "Automatic and centralized system that replaces endless Excel and organizes your operations in a single flow.",
+      "title": "Harmony Flow System",
+      "description": "The Implementation (Core Service). System and automation design that adapts to your real process, not the other way around.",
       "features": [
-        "Data centralization in a modern database (Supabase / PostgreSQL)",
-        "Automation with n8n + AI for repetitive tasks",
-        "Integration with WhatsApp, LINE, Google Calendar and more",
-        "Custom internal panel or app for your team"
+        "Selective automation (only where it adds value)",
+        "Less dependence on key people",
+        "Integration with tools you already use (Excel, legacy systems)"
       ]
     },
     "continuousHarmony": {
       "title": "Continuous Harmony",
-      "description": "Monthly maintenance and optimization so your system evolves with you without returning to chaos.",
+      "description": "The Maintenance. Continuous strategic accompaniment. TenryuAG acts as the Guardian Architect of Order for your business.",
       "features": [
-        "Flow monitoring and error correction",
-        "Adjustments for changes in your operations",
-        "New small automations each month",
-        "Continuous support and improvement of your systems"
+        "Prevent chaos from returning with growth",
+        "Gradual and controlled adjustments",
+        "Long-term operational tranquility"
       ]
     }
   },
   "about": {
-    "badge": "About TenryuAG",
-    "title": "Discipline, Creativity, and Harmony",
-    "description1": "With over 4 years of experience as a developer in Japan, I integrate Japanese discipline, Mexican creativity, and modern technology to create automatic flows that combine clarity, stability, and harmony.",
-    "description2": "I specialize in AI automations, enterprise integrations, and full-stack development with React and Spring Boot. I have worked on corporate projects for Japanese companies in the financial, manufacturing, and consulting sectors.",
-    "punctualDelivery": {
-      "title": "Timely Deliveries",
-      "description": "Clear and realistic deadlines, respecting your operations"
+    "badge": "ABOUT ME",
+    "title": "The origin of TenryuAG",
+    "description1": "I come from the technical world. For years I worked as a backend developer, building systems, APIs, and automations. But I understood something key: Technology without order solves no problems. It only accelerates them.",
+    "description2": "I saw companies with more software... and more chaos. More automation... and less control. The problem wasn't the lack of technology. It was the lack of operational clarity.",
+    "philosophy": {
+      "title": "Our philosophy",
+      "description": "We are not an agency that implements and leaves. We are guardians of your system."
     },
-    "focusOnResults": {
-      "title": "Focus on Results",
-      "description": "Less chaos, more control and time for what matters"
+    "differentiator": {
+      "title": "Our differentiator",
+      "description": "We speak your language. We don't use tech-speak. We explain your business in a clear, human, and understandable way."
     }
   },
   "projects": {
-    "badge": "Portfolio",
-    "title": "Featured Projects",
-    "description": "Some examples of solutions I have developed",
-    "worktrack": {
-      "title": "WorkTrack – Production Order System",
-      "description": "Control and tracking app for Japanese companies with modules for orders, clients, production, and traceability"
+    "badge": "PROJECTS",
+    "title": "Real Cases",
+    "description": "Client archetypes and real solutions",
+    "caseA": {
+      "title": "Case A – The SME with Operational Blindness",
+      "description": "Situation: Giant Excel, decisions by guessing.\nSolution: Operational Harmony Map.\nResult: Immediate clarity. The owner understood what was happening and what not to touch."
     },
-    "reservations": {
-      "title": "Automated Booking System",
-      "description": "WhatsApp/n8n chatbot that schedules, confirms, and manages appointments without human intervention, with Google Calendar integration"
+    "caseB": {
+      "title": "Case B – The Fear of Breaking What Works",
+      "description": "Situation: Traditional company, afraid to modernize.\nSolution: Harmony Flow System (gradual change).\nResult: Modernization without stopping operations for a single day."
     },
-    "sales": {
-      "title": "Sales Assistant - Heavy Machinery",
-      "description": "Bot that receives messages, automatically quotes, registers data in CRM, and sends PDFs. Complete automation of the sales flow"
-    },
-    "administratio": {
-      "title": "Administratio System – Risk Matrix",
-      "description": "App to evaluate, visualize, and prioritize operational risks in companies, with action tracking"
+    "caseC": {
+      "title": "Case C – The Chaos of Growth",
+      "description": "Situation: They grew fast and lost control.\nSolution: Continuous Harmony.\nResult: Sustained growth without returning to disorder."
     }
   },
   "testimonials": {
-    "badge": "Testimonials",
-    "title": "What My Clients Say",
-    "commercialDirector": {
-      "name": "Commercial Director",
-      "role": "Mexico City",
-      "content": "Thanks to TenryuAG, we stopped wasting time on repetitive tasks. Today everything updates automatically, and our team can finally focus on selling."
+    "badge": "TESTIMONIALS",
+    "title": "The Voice of the Client",
+    "client1": {
+      "content": "For the first time I slept peacefully. It stopped being all intuition and stress.",
+      "author": "SME Owner"
     },
-    "operationsManager": {
-      "name": "Operations Manager",
-      "role": "Mexico",
-      "content": "We managed to automate 80% of WhatsApp customer service. The experience was clear, professional, and always reliable."
+    "client2": {
+      "content": "Finally someone explained my business to me without technicalities or weird words.",
+      "author": "Operations Manager"
     },
-    "corporateClient": {
-      "name": "Corporate Client",
-      "role": "Financial Sector - Japan",
-      "content": "Excellent communication, quality development, and visible results from the first week."
+    "client3": {
+      "content": "I was afraid of breaking my operation. Not only did they not break it, they strengthened it.",
+      "author": "Traditional Company"
     }
   },
   "contact": {
-    "badge": "Contact",
-    "title": "Ready to Get Started?",
-    "description": "Tell me how you work today, and we'll design together the flow your business needs.",
+    "badge": "CONTACT",
+    "title": "Regaining control starts with a conversation",
+    "description": "It doesn't start with a software invoice. It starts with clarity.",
+    "cta": "Schedule your Clarity Session",
+    "note": "Trust Note: No sales pressure. First we understand. Then we propose.",
+    "final": "TenryuAG does not sell technology. It sells control, security, and criteria to decide.",
     "form": {
-      "step": "Step",
-      "of": "of",
-      "step1": {
-        "title": "Let's start with the basics",
-        "description": "We just need some information to contact you",
-        "name": "Full name",
-        "namePlaceholder": "Your name",
-        "nameRequired": "Name is required",
-        "email": "Email",
-        "emailPlaceholder": "you@company.com",
-        "emailRequired": "Email is required",
-        "emailInvalid": "Email is not valid",
-        "emailHelper": "We'll contact you at this email within 24 hours"
-      },
-      "step2": {
-        "title": "What are you looking for?",
-        "description": "Tell us a bit about your project",
-        "solutionType": "What type of solution are you looking for?",
-        "solutionTypeHelper": "This helps us assign the right specialist",
-        "solutionTypeRequired": "Select an option",
-        "solutionTypes": {
-          "development": "App / Web Development",
-          "automation": "AI Automation",
-          "system": "Custom System",
-          "consulting": "Technical Consulting",
-          "other": "Other"
-        },
-        "clarity": "How clear is your problem?",
-        "clarityHelper": "Don't worry, we'll help you define it better",
-        "clarityRequired": "Select an option",
-        "clarityLevels": {
-          "clear": "I'm clear about the problem",
-          "idea": "I have an idea, but I don't know how to solve it",
-          "explore": "I'm not exactly sure, but I want to improve my processes"
-        }
-      },
-      "step3": {
-        "title": "Final details",
-        "description": "This will help us personalize our proposal",
-        "priority": "What is your main priority?",
-        "priorityHelper": "We'll optimize our solution according to your priority",
-        "priorityRequired": "Select an option",
-        "priorities": {
-          "fast": "Launch quickly",
-          "costs": "Reduce costs",
-          "automate": "Automate processes",
-          "experience": "Improve design / experience",
-          "integrate": "Integrate existing systems"
-        },
-        "message": "Brief message",
-        "messageOptional": "(optional)",
-        "messagePlaceholder": "Tell us a bit more about your project or needs...",
-        "messageHelper": "Any additional details help us better prepare our call"
-      },
-      "previous": "Previous",
-      "next": "Next",
-      "submit": "Send message",
-      "sending": "Sending...",
-      "privacy": "🔒 Your data is protected and will never be shared",
-      "successMessage": "Message sent successfully! We'll contact you soon.",
-      "errorMessage": "There was an error sending the message. Please try again."
-    }
+         "step": "Step",
+         "of": "of",
+         "step1": {
+           "title": "Let's start with the basics",
+           "description": "We just need some information to contact you",
+           "name": "Full name",
+           "namePlaceholder": "Your name",
+           "nameRequired": "Name is required",
+           "email": "Email",
+           "emailPlaceholder": "you@company.com",
+           "emailRequired": "Email is required",
+           "emailInvalid": "Email is not valid",
+           "emailHelper": "We'll contact you at this email within 24 hours"
+         },
+         "step2": {
+           "title": "What are you looking for?",
+           "description": "Tell us a bit about your project",
+           "solutionType": "What type of solution are you looking for?",
+           "solutionTypeHelper": "This helps us assign the right specialist",
+           "solutionTypeRequired": "Select an option",
+           "solutionTypes": {
+             "development": "App / Web Development",
+             "automation": "AI Automation",
+             "system": "Custom System",
+             "consulting": "Technical Consulting",
+             "other": "Other"
+           },
+           "clarity": "How clear is your problem?",
+           "clarityHelper": "Don't worry, we'll help you define it better",
+           "clarityRequired": "Select an option",
+           "clarityLevels": {
+             "clear": "I'm clear about the problem",
+             "idea": "I have an idea, but I don't know how to solve it",
+             "explore": "I'm not exactly sure, but I want to improve my processes"
+           }
+         },
+         "step3": {
+           "title": "Final details",
+           "description": "This will help us personalize our proposal",
+           "priority": "What is your main priority?",
+           "priorityHelper": "We'll optimize our solution according to your priority",
+           "priorityRequired": "Select an option",
+           "priorities": {
+             "fast": "Launch quickly",
+             "costs": "Reduce costs",
+             "automate": "Automate processes",
+             "experience": "Improve design / experience",
+             "integrate": "Integrate existing systems"
+           },
+           "message": "Brief message",
+           "messageOptional": "(optional)",
+           "messagePlaceholder": "Tell us a bit more about your project or needs...",
+           "messageHelper": "Any additional details help us better prepare our call"
+         },
+         "previous": "Previous",
+         "next": "Next",
+         "submit": "Send message",
+         "sending": "Sending...",
+         "privacy": "🔒 Your data is protected and will never be shared",
+         "successMessage": "Message sent successfully! We'll contact you soon.",
+         "errorMessage": "There was an error sending the message. Please try again."
+       }
   },
   "footer": {
     "copyright": "© 2025 TenryuAG. All rights reserved."

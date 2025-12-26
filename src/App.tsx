@@ -19,7 +19,7 @@ import {
   Target,
   Workflow,
   Database,
-  Lightbulb
+  Lightbulb,
 } from "lucide-react";
 import { ImageWithFallback } from "./components/figma/ImageWithFallback";
 import { Card3D } from "./components/Card3D";
@@ -41,7 +41,7 @@ export default function App() {
 
   // Actualizar scroll progress para las partículas
   useEffect(() => {
-    const unsubscribe = scrollYProgress.on('change', (latest) => {
+    const unsubscribe = scrollYProgress.on("change", (latest) => {
       setScrollProgress(latest);
     });
     return () => unsubscribe();
@@ -49,14 +49,24 @@ export default function App() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ["home", "services", "about", "projects", "testimonials", "contact"];
+      const sections = [
+        "home",
+        "services",
+        "about",
+        "projects",
+        "testimonials",
+        "contact",
+      ];
       const scrollPosition = window.scrollY + 100;
 
       for (const section of sections) {
         const element = document.getElementById(section);
         if (element) {
           const { offsetTop, offsetHeight } = element;
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+          if (
+            scrollPosition >= offsetTop &&
+            scrollPosition < offsetTop + offsetHeight
+          ) {
             setActiveSection(section);
             break;
           }
@@ -74,67 +84,61 @@ export default function App() {
       icon: <Lightbulb className="w-12 h-12" />,
       titleKey: "services.map.title",
       descriptionKey: "services.map.description",
-      featuresKey: "services.map.features"
+      featuresKey: "services.map.features",
     },
     {
       icon: <Workflow className="w-12 h-12" />,
       titleKey: "services.harmonyFlow.title",
       descriptionKey: "services.harmonyFlow.description",
-      featuresKey: "services.harmonyFlow.features"
+      featuresKey: "services.harmonyFlow.features",
     },
     {
       icon: <Clock className="w-12 h-12" />,
       titleKey: "services.continuousHarmony.title",
       descriptionKey: "services.continuousHarmony.description",
-      featuresKey: "services.continuousHarmony.features"
-    }
+      featuresKey: "services.continuousHarmony.features",
+    },
   ];
 
   const projects = [
     {
-      titleKey: "projects.worktrack.title",
-      descriptionKey: "projects.worktrack.description",
-      tags: ["React", "TypeScript", "Linux", "Spring Boot"],
-      image: "/images/worktrack.png"
+      titleKey: "projects.caseA.title",
+      descriptionKey: "projects.caseA.description",
+      tags: ["Diagnóstico", "Mapa", "Claridad"],
+      image: "/images/worktrack.png",
     },
     {
-      titleKey: "projects.reservations.title",
-      descriptionKey: "projects.reservations.description",
-      tags: ["n8n", "WhatsApp", "Google Calendar", "Webhooks"],
-      image: "/images/reservaciones.png"
+      titleKey: "projects.caseB.title",
+      descriptionKey: "projects.caseB.description",
+      tags: ["Modernización", "Gradual", "Seguridad"],
+      image: "/images/reservaciones.png",
     },
     {
-      titleKey: "projects.sales.title",
-      descriptionKey: "projects.sales.description",
-      tags: ["n8n", "WhatsApp", "CRM", "PDF Generation"],
-      image: "/images/cotizaciones.png"
+      titleKey: "projects.caseC.title",
+      descriptionKey: "projects.caseC.description",
+      tags: ["Escalabilidad", "Control", "Mantenimiento"],
+      image: "/images/cotizaciones.png",
     },
-    {
-      titleKey: "projects.administratio.title",
-      descriptionKey: "projects.administratio.description",
-      tags: ["TypeScript", "PostgreSQL", "React", "Supabase"],
-      image: "/images/matrizriesgos.png"
-    }
   ];
 
   const testimonials = [
     {
-      nameKey: "testimonials.commercialDirector.name",
-      roleKey: "testimonials.commercialDirector.role",
-      contentKey: "testimonials.commercialDirector.content",
-      avatar: "DC"
+      nameKey: "testimonials.client1.author",
+      roleKey: "testimonials.client1.author", 
+      contentKey: "testimonials.client1.content",
+      avatar: "P1"
     },
     {
-      nameKey: "testimonials.operationsManager.name",
-      roleKey: "testimonials.operationsManager.role",
-      contentKey: "testimonials.operationsManager.content",
-      avatar: "GO"
+      nameKey: "testimonials.client2.author",
+      roleKey: "testimonials.client2.author",
+      contentKey: "testimonials.client2.content",
+      avatar: "P2"
     },
     {
-      nameKey: "testimonials.corporateClient.name",
-      roleKey: "testimonials.corporateClient.role",
-      contentKey: "testimonials.corporateClient.content",
-      avatar: "CC"
+      nameKey: "testimonials.client3.author",
+      roleKey: "testimonials.client3.author",
+      contentKey: "testimonials.client3.content",
+      avatar: "P3"
     }
   ];
 
@@ -160,37 +164,54 @@ export default function App() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <motion.div className="flex items-center gap-2" whileHover={{ scale: 1.05 }}>
+            <motion.div
+              className="flex items-center gap-2"
+              whileHover={{ scale: 1.05 }}
+            >
               <Sparkles className="w-6 h-6 text-primary" />
               <span className="font-semibold text-lg">TenryuAG</span>
             </motion.div>
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center gap-8">
-              {["home", "services", "about", "projects", "testimonials", "contact"].map(
-                (sectionId) => {
-                  return (
-                    <button
-                      key={sectionId}
-                      onClick={() => scrollToSection(sectionId)}
-                      className={`transition-colors ${
-                        activeSection === sectionId
-                          ? "text-primary"
-                          : "text-muted-foreground hover:text-foreground"
-                      }`}
-                    >
-                      {t(`nav.${sectionId}`)}
-                    </button>
-                  );
-                }
-              )}
+              {[
+                "home",
+                "services",
+                "about",
+                "projects",
+                "testimonials",
+                "contact",
+              ].map((sectionId) => {
+                return (
+                  <button
+                    key={sectionId}
+                    onClick={() => scrollToSection(sectionId)}
+                    className={`transition-colors ${
+                      activeSection === sectionId
+                        ? "text-primary"
+                        : "text-muted-foreground hover:text-foreground"
+                    }`}
+                  >
+                    {t(`nav.${sectionId}`)}
+                  </button>
+                );
+              })}
               <LanguageSwitcher />
-              <Button onClick={() => scrollToSection("contact")}>{t('nav.contactMe')}</Button>
+              <Button onClick={() => scrollToSection("contact")}>
+                {t("nav.contactMe")}
+              </Button>
             </div>
 
             {/* Mobile Menu Button */}
-            <button className="md:hidden p-2" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            <button
+              className="md:hidden p-2"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              {mobileMenuOpen ? (
+                <X className="w-6 h-6" />
+              ) : (
+                <Menu className="w-6 h-6" />
+              )}
             </button>
           </div>
 
@@ -202,19 +223,24 @@ export default function App() {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
             >
-              {["home", "services", "about", "projects", "testimonials", "contact"].map(
-                (sectionId) => {
-                  return (
-                    <button
-                      key={sectionId}
-                      onClick={() => scrollToSection(sectionId)}
-                      className="block w-full text-left py-2 text-muted-foreground hover:text-foreground transition-colors"
-                    >
-                      {t(`nav.${sectionId}`)}
-                    </button>
-                  );
-                }
-              )}
+              {[
+                "home",
+                "services",
+                "about",
+                "projects",
+                "testimonials",
+                "contact",
+              ].map((sectionId) => {
+                return (
+                  <button
+                    key={sectionId}
+                    onClick={() => scrollToSection(sectionId)}
+                    className="block w-full text-left py-2 text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    {t(`nav.${sectionId}`)}
+                  </button>
+                );
+              })}
               <div className="pt-4">
                 <LanguageSwitcher />
               </div>
@@ -237,7 +263,7 @@ export default function App() {
                 transition={{ delay: 0.2 }}
               >
                 <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">
-                  {t('hero.badge')}
+                  {t("hero.badge")}
                 </Badge>
               </motion.div>
 
@@ -247,11 +273,11 @@ export default function App() {
                 transition={{ delay: 0.3 }}
                 className="text-4xl sm:text-5xl lg:text-6xl leading-tight"
               >
-                {t('hero.title')}
+                {t("hero.title")}
                 <br />
-                {t('hero.subtitle1')}
+                {t("hero.subtitle1")}
                 <br />
-                <span className="text-primary">{t('hero.subtitle2')}</span>
+                <span className="text-primary">{t("hero.subtitle2")}</span>
               </motion.h1>
 
               <motion.p
@@ -260,7 +286,7 @@ export default function App() {
                 transition={{ delay: 0.4 }}
                 className="text-xl text-muted-foreground max-w-2xl"
               >
-                {t('hero.description')}
+                {t("hero.description")}
               </motion.p>
 
               <motion.div
@@ -269,8 +295,12 @@ export default function App() {
                 transition={{ delay: 0.5 }}
                 className="flex flex-col sm:flex-row gap-4"
               >
-                <Button size="lg" onClick={() => scrollToSection("contact")} className="group">
-                  {t('hero.startProject')}
+                <Button
+                  size="lg"
+                  onClick={() => scrollToSection("contact")}
+                  className="group"
+                >
+                  {t("hero.startProject")}
                   <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Button>
                 <Button
@@ -278,7 +308,7 @@ export default function App() {
                   variant="outline"
                   onClick={() => scrollToSection("services")}
                 >
-                  {t('hero.seeHowIWork')}
+                  {t("hero.seeHowIWork")}
                 </Button>
               </motion.div>
 
@@ -290,15 +320,21 @@ export default function App() {
               >
                 <div>
                   <div className="text-3xl font-semibold text-primary">20+</div>
-                  <div className="text-sm text-muted-foreground">{t('hero.stats.projects')}</div>
+                  <div className="text-sm text-muted-foreground">
+                    {t("hero.stats.projects")}
+                  </div>
                 </div>
                 <div>
                   <div className="text-3xl font-semibold text-primary">90%</div>
-                  <div className="text-sm text-muted-foreground">{t('hero.stats.satisfaction')}</div>
+                  <div className="text-sm text-muted-foreground">
+                    {t("hero.stats.satisfaction")}
+                  </div>
                 </div>
                 <div>
                   <div className="text-3xl font-semibold text-primary">4+</div>
-                  <div className="text-sm text-muted-foreground">{t('hero.stats.experience')}</div>
+                  <div className="text-sm text-muted-foreground">
+                    {t("hero.stats.experience")}
+                  </div>
                 </div>
               </motion.div>
             </motion.div>
@@ -345,11 +381,11 @@ export default function App() {
             className="text-center mb-16"
           >
             <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">
-              {t('services.badge')}
+              {t("services.badge")}
             </Badge>
-            <h2 className="text-4xl sm:text-5xl mb-4">{t('services.title')}</h2>
+            <h2 className="text-4xl sm:text-5xl mb-4">{t("services.title")}</h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              {t('services.description')}
+              {t("services.description")}
             </p>
           </motion.div>
 
@@ -365,14 +401,21 @@ export default function App() {
               >
                 <Card3D>
                   <div className="p-8 h-full">
-                    <div className="text-primary mb-4">
-                      {service.icon}
-                    </div>
+                    <div className="text-primary mb-4">{service.icon}</div>
                     <h3 className="text-2xl mb-3">{t(service.titleKey)}</h3>
-                    <p className="text-muted-foreground mb-6">{t(service.descriptionKey)}</p>
+                    <p className="text-muted-foreground mb-6">
+                      {t(service.descriptionKey)}
+                    </p>
                     <ul className="space-y-2">
-                      {(t(service.featuresKey, { returnObjects: true }) as string[]).map((feature, idx) => (
-                        <li key={idx} className="flex items-center gap-2 text-sm">
+                      {(
+                        t(service.featuresKey, {
+                          returnObjects: true,
+                        }) as string[]
+                      ).map((feature, idx) => (
+                        <li
+                          key={idx}
+                          className="flex items-center gap-2 text-sm"
+                        >
                           <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0" />
                           <span>{feature}</span>
                         </li>
@@ -397,14 +440,14 @@ export default function App() {
               className="space-y-6"
             >
               <Badge className="bg-accent/10 text-accent border-accent/20">
-                {t('about.badge')}
+                {t("about.badge")}
               </Badge>
-              <h2 className="text-4xl sm:text-5xl">{t('about.title')}</h2>
+              <h2 className="text-4xl sm:text-5xl">{t("about.title")}</h2>
               <p className="text-lg text-muted-foreground">
-                {t('about.description1')}
+                {t("about.description1")}
               </p>
               <p className="text-lg text-muted-foreground">
-                {t('about.description2')}
+                {t("about.description2")}
               </p>
 
               <div className="grid sm:grid-cols-2 gap-6 pt-4">
@@ -415,9 +458,9 @@ export default function App() {
                     </div>
                   </div>
                   <div>
-                    <h4>{t('about.punctualDelivery.title')}</h4>
+                    <h4>{t('about.philosophy.title')}</h4>
                     <p className="text-sm text-muted-foreground">
-                      {t('about.punctualDelivery.description')}
+                      {t('about.philosophy.description')}
                     </p>
                   </div>
                 </div>
@@ -429,9 +472,9 @@ export default function App() {
                     </div>
                   </div>
                   <div>
-                    <h4>{t('about.focusOnResults.title')}</h4>
+                    <h4>{t('about.differentiator.title')}</h4>
                     <p className="text-sm text-muted-foreground">
-                      {t('about.focusOnResults.description')}
+                      {t('about.differentiator.description')}
                     </p>
                   </div>
                 </div>
@@ -442,7 +485,10 @@ export default function App() {
       </section>
 
       {/* Projects Section */}
-      <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/30 relative z-10">
+      <section
+        id="projects"
+        className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/30 relative z-10"
+      >
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -450,10 +496,12 @@ export default function App() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <Badge className="mb-4 bg-accent/10 text-accent border-accent/20">{t('projects.badge')}</Badge>
-            <h2 className="text-4xl sm:text-5xl mb-4">{t('projects.title')}</h2>
+            <Badge className="mb-4 bg-accent/10 text-accent border-accent/20">
+              {t("projects.badge")}
+            </Badge>
+            <h2 className="text-4xl sm:text-5xl mb-4">{t("projects.title")}</h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              {t('projects.description')}
+              {t("projects.description")}
             </p>
           </motion.div>
 
@@ -479,7 +527,9 @@ export default function App() {
                   </div>
                   <div className="p-6">
                     <h3 className="text-xl mb-2">{t(project.titleKey)}</h3>
-                    <p className="text-muted-foreground mb-4">{t(project.descriptionKey)}</p>
+                    <p className="text-muted-foreground mb-4">
+                      {t(project.descriptionKey)}
+                    </p>
                     <div className="flex flex-wrap gap-2">
                       {project.tags.map((tag) => (
                         <Badge key={tag} variant="outline" className="text-xs">
@@ -496,7 +546,10 @@ export default function App() {
       </section>
 
       {/* Testimonials Section */}
-      <section id="testimonials" className="py-20 px-4 sm:px-6 lg:px-8 relative z-10">
+      <section
+        id="testimonials"
+        className="py-20 px-4 sm:px-6 lg:px-8 relative z-10"
+      >
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -505,9 +558,11 @@ export default function App() {
             className="text-center mb-16"
           >
             <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">
-              {t('testimonials.badge')}
+              {t("testimonials.badge")}
             </Badge>
-            <h2 className="text-4xl sm:text-5xl mb-4">{t('testimonials.title')}</h2>
+            <h2 className="text-4xl sm:text-5xl mb-4">
+              {t("testimonials.title")}
+            </h2>
           </motion.div>
 
           <div className="grid md:grid-cols-3 gap-8">
@@ -526,10 +581,14 @@ export default function App() {
                     </div>
                     <div>
                       <h4>{t(testimonial.nameKey)}</h4>
-                      <p className="text-sm text-muted-foreground">{t(testimonial.roleKey)}</p>
+                      <p className="text-sm text-muted-foreground">
+                        {t(testimonial.roleKey)}
+                      </p>
                     </div>
                   </div>
-                  <p className="text-muted-foreground italic">"{t(testimonial.contentKey)}"</p>
+                  <p className="text-muted-foreground italic">
+                    "{t(testimonial.contentKey)}"
+                  </p>
                 </Card>
               </motion.div>
             ))}
@@ -538,7 +597,10 @@ export default function App() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/30 relative z-10">
+      <section
+        id="contact"
+        className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/30 relative z-10"
+      >
         <div className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -546,10 +608,12 @@ export default function App() {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <Badge className="mb-4 bg-accent/10 text-accent border-accent/20">{t('contact.badge')}</Badge>
-            <h2 className="text-4xl sm:text-5xl mb-4">{t('contact.title')}</h2>
+            <Badge className="mb-4 bg-accent/10 text-accent border-accent/20">
+              {t("contact.badge")}
+            </Badge>
+            <h2 className="text-4xl sm:text-5xl mb-4">{t("contact.title")}</h2>
             <p className="text-xl text-muted-foreground">
-              {t('contact.description')}
+              {t("contact.description")}
             </p>
           </motion.div>
 
@@ -564,7 +628,7 @@ export default function App() {
                 onSubmit={(data) => {
                   console.log("Datos del formulario:", data);
                   // Aquí conectarás con tu backend o n8n
-                  alert(t('contact.form.successMessage'));
+                  alert(t("contact.form.successMessage"));
                 }}
               />
 
@@ -602,7 +666,7 @@ export default function App() {
       {/* Footer */}
       <footer className="py-8 px-4 sm:px-6 lg:px-8 border-t border-border relative z-10">
         <div className="max-w-7xl mx-auto text-center text-muted-foreground">
-          <p>{t('footer.copyright')}</p>
+          <p>{t("footer.copyright")}</p>
         </div>
       </footer>
     </div>
