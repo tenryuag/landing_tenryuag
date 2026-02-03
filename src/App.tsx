@@ -168,7 +168,7 @@ export default function App() {
               className="flex items-center gap-2"
               whileHover={{ scale: 1.05 }}
             >
-              <Sparkles className="w-6 h-6 text-primary" />
+              <img src="/images/LogoTenryuAG.png" alt="TenryuAG Logo" className="w-8 h-8 object-contain" />
               <span className="font-semibold text-lg">TenryuAG</span>
             </motion.div>
 
@@ -252,10 +252,11 @@ export default function App() {
       {/* Hero Section */}
       <section
         id="home"
-        className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 min-h-screen flex items-center relative"
+        className="hero pt-32 pb-20 px-4 sm:px-6 lg:px-8 min-h-screen flex items-center relative overflow-hidden"
       >
-        <div className="max-w-7xl mx-auto w-full">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <ParticleField variant="right" />
+        <div className="max-w-7xl mx-auto w-full relative z-10">
+          <div className="max-w-2xl">
             <motion.div style={{ opacity, scale }} className="space-y-6">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -271,7 +272,7 @@ export default function App() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
-                className="text-4xl sm:text-5xl lg:text-6xl leading-tight"
+                className="text-4xl sm:text-5xl lg:text-6xl leading-tight mb-6"
               >
                 {t("hero.title")}
                 <br />
@@ -284,7 +285,7 @@ export default function App() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
-                className="text-xl text-muted-foreground max-w-2xl"
+                className="text-xl text-foreground/80 max-w-2xl mb-8 font-medium"
               >
                 {t("hero.description")}
               </motion.p>
@@ -293,7 +294,7 @@ export default function App() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 }}
-                className="flex flex-col sm:flex-row gap-4"
+                className="flex flex-col sm:flex-row gap-4 mb-8"
               >
                 <Button
                   size="lg"
@@ -316,7 +317,7 @@ export default function App() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.6 }}
-                className="flex flex-wrap gap-8 pt-8"
+                className="flex flex-wrap gap-8"
               >
                 <div>
                   <div className="text-3xl font-semibold text-primary">20+</div>
@@ -338,31 +339,6 @@ export default function App() {
                 </div>
               </motion.div>
             </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.4, duration: 0.8 }}
-              className="relative"
-            >
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-                <ImageWithFallback
-                  src="https://images.unsplash.com/photo-1644337540803-2b2fb3cebf12?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtaW5pbWFsaXN0JTIwd29ya3NwYWNlJTIwZGVza3xlbnwxfHx8fDE3NjI5NzEyMTJ8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-                  alt="Workspace"
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-accent/20" />
-              </div>
-
-              {/* Floating Elements */}
-              <FloatingIcon position="top-right">
-                <Code2 className="w-8 h-8 text-primary" />
-              </FloatingIcon>
-
-              <FloatingIcon position="bottom-left">
-                <Zap className="w-8 h-8 text-accent" />
-              </FloatingIcon>
-            </motion.div>
           </div>
         </div>
       </section>
@@ -380,13 +356,15 @@ export default function App() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">
-              {t("services.badge")}
-            </Badge>
-            <h2 className="text-4xl sm:text-5xl mb-4">{t("services.title")}</h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              {t("services.description")}
-            </p>
+            <div className="inline-block bg-background/40 backdrop-blur-md p-8 rounded-2xl border border-white/10 shadow-lg">
+              <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">
+                {t("services.badge")}
+              </Badge>
+              <h2 className="text-4xl sm:text-5xl mb-4">{t("services.title")}</h2>
+              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+                {t("services.description")}
+              </p>
+            </div>
           </motion.div>
 
           <div className="grid md:grid-cols-3 gap-8">
@@ -439,43 +417,45 @@ export default function App() {
               viewport={{ once: true }}
               className="space-y-6"
             >
-              <Badge className="bg-accent/10 text-accent border-accent/20">
-                {t("about.badge")}
-              </Badge>
-              <h2 className="text-4xl sm:text-5xl">{t("about.title")}</h2>
-              <p className="text-lg text-muted-foreground">
-                {t("about.description1")}
-              </p>
-              <p className="text-lg text-muted-foreground">
-                {t("about.description2")}
-              </p>
+              <div className="bg-background/40 backdrop-blur-md p-8 rounded-2xl border border-white/10 shadow-lg">
+                <Badge className="bg-accent/10 text-accent border-accent/20">
+                  {t("about.badge")}
+                </Badge>
+                <h2 className="text-4xl sm:text-5xl mt-4 mb-4">{t("about.title")}</h2>
+                <p className="text-lg text-muted-foreground mb-4">
+                  {t("about.description1")}
+                </p>
+                <p className="text-lg text-muted-foreground mb-6">
+                  {t("about.description2")}
+                </p>
 
-              <div className="grid sm:grid-cols-2 gap-6 pt-4">
-                <div className="flex gap-4">
-                  <div className="flex-shrink-0">
-                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-                      <Clock className="w-6 h-6 text-primary" />
+                <div className="grid sm:grid-cols-2 gap-6 pt-4">
+                  <div className="flex gap-4">
+                    <div className="flex-shrink-0">
+                      <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+                        <Clock className="w-6 h-6 text-primary" />
+                      </div>
+                    </div>
+                    <div>
+                      <h4>{t('about.philosophy.title')}</h4>
+                      <p className="text-sm text-muted-foreground">
+                        {t('about.philosophy.description')}
+                      </p>
                     </div>
                   </div>
-                  <div>
-                    <h4>{t('about.philosophy.title')}</h4>
-                    <p className="text-sm text-muted-foreground">
-                      {t('about.philosophy.description')}
-                    </p>
-                  </div>
-                </div>
 
-                <div className="flex gap-4">
-                  <div className="flex-shrink-0">
-                    <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center">
-                      <Target className="w-6 h-6 text-accent" />
+                  <div className="flex gap-4">
+                    <div className="flex-shrink-0">
+                      <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center">
+                        <Target className="w-6 h-6 text-accent" />
+                      </div>
                     </div>
-                  </div>
-                  <div>
-                    <h4>{t('about.differentiator.title')}</h4>
-                    <p className="text-sm text-muted-foreground">
-                      {t('about.differentiator.description')}
-                    </p>
+                    <div>
+                      <h4>{t('about.differentiator.title')}</h4>
+                      <p className="text-sm text-muted-foreground">
+                        {t('about.differentiator.description')}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -496,13 +476,15 @@ export default function App() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <Badge className="mb-4 bg-accent/10 text-accent border-accent/20">
-              {t("projects.badge")}
-            </Badge>
-            <h2 className="text-4xl sm:text-5xl mb-4">{t("projects.title")}</h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              {t("projects.description")}
-            </p>
+            <div className="inline-block bg-background/40 backdrop-blur-md p-8 rounded-2xl border border-white/10 shadow-lg">
+              <Badge className="mb-4 bg-accent/10 text-accent border-accent/20">
+                {t("projects.badge")}
+              </Badge>
+              <h2 className="text-4xl sm:text-5xl mb-4">{t("projects.title")}</h2>
+              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+                {t("projects.description")}
+              </p>
+            </div>
           </motion.div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -557,12 +539,14 @@ export default function App() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">
-              {t("testimonials.badge")}
-            </Badge>
-            <h2 className="text-4xl sm:text-5xl mb-4">
-              {t("testimonials.title")}
-            </h2>
+            <div className="inline-block bg-background/40 backdrop-blur-md p-8 rounded-2xl border border-white/10 shadow-lg">
+              <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">
+                {t("testimonials.badge")}
+              </Badge>
+              <h2 className="text-4xl sm:text-5xl mb-4">
+                {t("testimonials.title")}
+              </h2>
+            </div>
           </motion.div>
 
           <div className="grid md:grid-cols-3 gap-8">
@@ -608,13 +592,15 @@ export default function App() {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <Badge className="mb-4 bg-accent/10 text-accent border-accent/20">
-              {t("contact.badge")}
-            </Badge>
-            <h2 className="text-4xl sm:text-5xl mb-4">{t("contact.title")}</h2>
-            <p className="text-xl text-muted-foreground">
-              {t("contact.description")}
-            </p>
+            <div className="inline-block bg-background/40 backdrop-blur-md p-8 rounded-2xl border border-white/10 shadow-lg">
+              <Badge className="mb-4 bg-accent/10 text-accent border-accent/20">
+                {t("contact.badge")}
+              </Badge>
+              <h2 className="text-4xl sm:text-5xl mb-4">{t("contact.title")}</h2>
+              <p className="text-xl text-muted-foreground">
+                {t("contact.description")}
+              </p>
+            </div>
           </motion.div>
 
           <motion.div

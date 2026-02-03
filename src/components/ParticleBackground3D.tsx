@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
+import dragonPointsRaw from '../data/dragon_points.json';
 
 interface ParticleBackground3DProps {
   scrollProgress: number;
@@ -18,7 +19,7 @@ export function ParticleBackground3D({ scrollProgress }: ParticleBackground3DPro
   const geometriesRef = useRef<{
     sphere: Float32Array;
     tesseract: Float32Array;
-    tesseract2: Float32Array;
+    dragon: Float32Array;
   } | null>(null);
 
   // Generar geometría de Esfera (planeta)
@@ -66,27 +67,32 @@ export function ParticleBackground3D({ scrollProgress }: ParticleBackground3DPro
     return positions;
   };
 
-  // Generar geometría de Teseracto 2 (versión expandida para contacto)
-  const generateTesseract2 = (particleCount: number): Float32Array => {
+  // Generar geometría de Dragón (Logo)
+  const generateDragon = (particleCount: number): Float32Array => {
     const positions = new Float32Array(particleCount * 3);
+    const dragonPoints = dragonPointsRaw as number[];
+    const dragonPointCount = dragonPoints.length / 3;
 
-    // Generar partículas en el volumen del hipercubo 4D (más grande)
     for (let i = 0; i < particleCount; i++) {
-      // Coordenadas aleatorias en el hipercubo 4D con mayor rango
-      const v = [
-        (Math.random() - 0.5) * 4.5,
-        (Math.random() - 0.5) * 4.5,
-        (Math.random() - 0.5) * 4.5,
-        (Math.random() - 0.5) * 4.5,
-      ];
+        // Usar módulo para repetir los puntos del dragón y cubrir todas las partículas
+        const index = i % dragonPointCount;
+        
+        // Coordenadas base del logo
+        // Escalar el logo (x1.8) según petición del usuario
+        const scale = 1.8;
+        const x = dragonPoints[index * 3] * scale;
+        const y = dragonPoints[index * 3 + 1] * scale;
+        const z = dragonPoints[index * 3 + 2] * scale; // Z es 0
 
-      // Proyección estereográfica 4D -> 3D con parámetros ajustados
-      const w = 0.6;
-      const scale = 2.2 / (3 - v[3] * w);
+        // Añadir pequeño "spread" en X e Y para rellenar huecos
+        // Usamos los duplicados para crear densidad en lugar de superponerlos
+        const spread = 0.04; 
+        const jitterX = (Math.random() - 0.5) * spread;
+        const jitterY = (Math.random() - 0.5) * spread;
 
-      positions[i * 3] = v[0] * scale;
-      positions[i * 3 + 1] = v[1] * scale;
-      positions[i * 3 + 2] = v[2] * scale;
+        positions[i * 3] = x + jitterX;
+        positions[i * 3 + 1] = y + jitterY;
+        positions[i * 3 + 2] = z; // Mantener Z plano para el look 2D
     }
     return positions;
   };
@@ -147,11 +153,14 @@ export function ParticleBackground3D({ scrollProgress }: ParticleBackground3DPro
       size: 0.025,
       transparent: true,
       opacity: 0.7,
-      blending: THREE.AdditiveBlending,
+      blending: THREE.NormalBlending, // Changed from Additive to prevent whiteout
+      depthWrite: false, // Ensure transparent sorting works better (though points aren't sorted, this avoids some issues)
       sizeAttenuation: true,
     });
 
     const particles = new THREE.Points(geometry, material);
+    // Disable frustum culling to prevent disappearance when shape changes drastically
+    particles.frustumCulled = false;
     scene.add(particles);
     particlesRef.current = particles;
 
@@ -159,7 +168,7 @@ export function ParticleBackground3D({ scrollProgress }: ParticleBackground3DPro
     geometriesRef.current = {
       sphere: generateSphere(particleCount),
       tesseract: generateTesseract(particleCount),
-      tesseract2: generateTesseract2(particleCount),
+      dragon: generateDragon(particleCount),
     };
 
     let lastMouseX = 0;
@@ -226,26 +235,60 @@ export function ParticleBackground3D({ scrollProgress }: ParticleBackground3DPro
       const newScale = currentScale + (targetScale - currentScale) * 0.1;
       particles.scale.set(newScale, newScale, newScale);
 
-      // Determinar qué geometría mostrar según el scroll
       let currentPositions: Float32Array;
-      const { sphere, tesseract, tesseract2 } = geometriesRef.current;
+      const { sphere, tesseract, dragon } = geometriesRef.current;
       const currentScrollProgress = scrollProgressRef.current;
 
       if (currentScrollProgress < 0.33) {
         // Transición de Esfera a Teseracto
         const alpha = currentScrollProgress / 0.33;
         currentPositions = interpolateGeometries(sphere, tesseract, alpha);
-      } else if (currentScrollProgress < 0.66) {
-        // Transición de Teseracto a Teseracto 2
-        const alpha = (currentScrollProgress - 0.33) / 0.33;
-        currentPositions = interpolateGeometries(tesseract, tesseract2, alpha);
-      } else {
-        // Mantener Teseracto 2 con pequeña variación
-        const alpha = Math.min((currentScrollProgress - 0.66) / 0.34, 1);
-        currentPositions = tesseract2;
+        
+        // Rotación continua
+        particles.rotation.y += 0.001 + Math.abs(mouseVelocityRef.current.x) * 0.01;
+        particles.rotation.x += Math.sin(Date.now() * 0.0002) * 0.001 + Math.abs(mouseVelocityRef.current.y) * 0.01;
 
-        // Añadir un pequeño efecto de "completitud"
-        particles.material.opacity = 0.7 + alpha * 0.3;
+      } else if (currentScrollProgress < 0.66) {
+        // Transición de Teseracto a Dragón
+        const alpha = (currentScrollProgress - 0.33) / 0.33;
+        currentPositions = interpolateGeometries(tesseract, dragon, alpha);
+        
+        // Desacelerar rotación mientras nos acercamos al dragón
+        const rotationFactor = 1 - alpha;
+        particles.rotation.y += (0.001 + Math.abs(mouseVelocityRef.current.x) * 0.01) * rotationFactor;
+        particles.rotation.x += (Math.sin(Date.now() * 0.0002) * 0.001 + Math.abs(mouseVelocityRef.current.y) * 0.01) * rotationFactor;
+        
+        // Interpolar hacia rotación 0 (frente)
+        particles.rotation.x *= (1 - alpha * 0.1); 
+        particles.rotation.y *= (1 - alpha * 0.1);
+
+      } else {
+        // Mantener Dragón TOTALMENTE ESTÁTICO
+        const alpha = Math.min((currentScrollProgress - 0.66) / 0.34, 1);
+        currentPositions = dragon;
+
+      	// Interpolación de color
+        const baseColor = new THREE.Color(0x8B9D83); // Verde original
+        const dragonColor = new THREE.Color(0x598d71); // Nuevo color del dragón
+
+        let currentColor = baseColor;
+
+        if (currentScrollProgress > 0.33 && currentScrollProgress < 0.66) {
+           // Transición de color durante Tesseract -> Dragon
+           const alpha = (currentScrollProgress - 0.33) / 0.33;
+           currentColor = baseColor.clone().lerp(dragonColor, alpha);
+        } else if (currentScrollProgress >= 0.66) {
+           // Color final del dragón
+           currentColor = dragonColor;
+        }
+        
+        particles.material.color = currentColor;
+
+        // Mantener opacidad constante (sin brillo extra)
+        particles.material.opacity = 0.7;
+        
+        // Forzar posición y rotación estática exacta
+        particles.rotation.set(0, 0, 0);
       }
 
       // Actualizar posiciones de partículas
@@ -255,9 +298,29 @@ export function ParticleBackground3D({ scrollProgress }: ParticleBackground3DPro
       }
       positionAttribute.needsUpdate = true;
 
-      // Rotación suave basada en el mouse
-      particles.rotation.y += 0.001 + Math.abs(mouseVelocityRef.current.x) * 0.01;
-      particles.rotation.x += Math.sin(Date.now() * 0.0002) * 0.001 + Math.abs(mouseVelocityRef.current.y) * 0.01;
+      // Manejo de rotación (RESTITUIDO)
+      // Solo rotamos si NO estamos en la fase final del dragón
+      if (currentScrollProgress < 0.66) {
+          // Rotación normal
+          let rotationSpeedY = 0.001 + Math.abs(mouseVelocityRef.current.x) * 0.01;
+          let rotationSpeedX = Math.sin(Date.now() * 0.0002) * 0.001 + Math.abs(mouseVelocityRef.current.y) * 0.01;
+          
+          // Desaceleración en transición hacia dragón
+          if (currentScrollProgress > 0.33) {
+             const alpha = (currentScrollProgress - 0.33) / 0.33;
+             // Cuando nos acercamos al dragón, reducimos la velocidad de rotación
+             const rotationFactor = Math.max(0, 1 - alpha);
+             rotationSpeedX *= rotationFactor;
+             rotationSpeedY *= rotationFactor;
+             
+             // Desvanecer rotación acumulada hacia 0 para que llegue "derecho"
+             particles.rotation.x *= (1 - alpha * 0.1);
+             particles.rotation.y *= (1 - alpha * 0.1);
+          }
+          
+          particles.rotation.y += rotationSpeedY;
+          particles.rotation.x += rotationSpeedX;
+      }
 
       renderer.render(scene, camera);
     };
